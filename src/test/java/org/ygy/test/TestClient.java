@@ -21,8 +21,10 @@ public class TestClient {
 	      
 	    @After  
 	    public void after() {  
-	        session.commit();  
-	        session.close();  
+	        if(session != null) {  
+	            session.close();  
+	            session = null;  
+	        }  
 	    }  
 	      
 	    @Test  
