@@ -38,8 +38,6 @@
                 }); 
                 	                    
         
-                // 为echarts对象加载数据 
-                myChart.setOption(option); 
             }
         );
     </script>
@@ -63,6 +61,21 @@
 		    		{field:'totalNum',title:'总注册人数',width:100,align:'right'}
 		        ]]
 		    });
+		    
+		    var columns_channel = '[[{"field":"channel_name","title":"负责人-渠道名称","width":100}]]';
+            //从后台获取json格式的数据  
+           /* $.getJSON("customer?act=columns" , function(data) {  
+            	columns_channel = data;
+            }); 
+		    */
+		    $('#dg_channel').datagrid({
+		    	title: '各渠道注册人数统计表',
+		        url:'customer?act=grid',
+		        method:'get',
+		        fitColumns: true,
+		        singleSelect: true,
+		        columns: [[{"field":"channel_name","title":"负责人-渠道名称","width":100},{"field":"channel_name","title":"负责人-渠道名称","width":100}]]
+		    });
 		});
 		
 	</script>
@@ -76,6 +89,8 @@
 		<h1>全站注册人数统计表</h1>
 		<div id="main" style="width: 900px;height:400px"></div>
 		<table id="dg" style="width: 600px;height:800px;"></table>
+		
+		<table id="dg_channel" style="width: 600px;height:800px;"></table>
 	</center>
 </body>
 </html>

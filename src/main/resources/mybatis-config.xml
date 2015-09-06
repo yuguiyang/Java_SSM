@@ -24,6 +24,7 @@
 	<!-- 映射文件 ,我们还没有，这里什么都不写 -->
 	<mappers>
 		<mapper resource="org/ygy/mapper/CustomerMapper.xml" />
+		<mapper resource="org/ygy/mapper/ChannelMapper.xml" />
 	</mappers>
 
 </configuration>

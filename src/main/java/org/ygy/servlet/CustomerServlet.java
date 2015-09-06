@@ -34,6 +34,10 @@ public class CustomerServlet extends HttpServlet {
 			result = customerService.queryRegisterInfo();
 		} else if("line".equals(act)) {
 			result = customerService.queryRegisterChart();
+		} else if("channel".equals(act)) {
+			result = customerService.queryChannelInfo();
+		} else if ("columns".equals(act)) {
+			result = customerService.queryColumns();
 		}
 		
 		PrintWriter pw = resp.getWriter();

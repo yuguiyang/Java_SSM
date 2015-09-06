@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="org.ygy.mapper.ChannelMapper">
+
+	<resultMap type="org.ygy.entity.ChannelEntity" id="channelMapper">
+		<result column="channel_id" property="id"/>
+		<result column="channel_show_name" property="name"/>
+		<result column="channel_show_url" property="url"/>
+	</resultMap>
+	
+	<resultMap type="org.ygy.vo.TitleVO" id="titleMapper">
+		<result column="title_id" property="id"/>
+		<result column="title_name" property="name"/>
+	</resultMap>
+  
+  	<select id="selectChannels" resultMap="channelMapper">
+  		select
+	 		 channel_id,
+	 		 channel_show_name,
+	 		 channel_show_url
+  		from
+  			dr_bi.v_dim_channel 
+  	</select>
+  	
+  	<select id="selectColumns" resultMap="titleMapper">
+  	<![CDATA[
+  		select 
+  			calendar_id title_id,
+  			date_format(calendar_date,'%m月%d日') title_name
+  		from 
+  			dm_calendar 
+  		where 
+  			calendar_id>=20150830 
+  		and 
+  			calendar_date<date(now())
+		order by 
+			calendar_date desc
+	]]> 
+  	</select>
+    
+</mapper> 

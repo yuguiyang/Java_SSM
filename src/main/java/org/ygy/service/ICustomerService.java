@@ -5,4 +5,8 @@ public interface ICustomerService {
 	public String queryRegisterInfo();
 
 	public String queryRegisterChart();
+
+	public String queryChannelInfo();
+
+	public String queryColumns();
 }
