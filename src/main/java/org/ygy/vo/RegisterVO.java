@@ -1,4 +1,4 @@
-package org.ygy.entity;
+package org.ygy.vo;
 
 public class RegisterVO implements java.io.Serializable {
 
