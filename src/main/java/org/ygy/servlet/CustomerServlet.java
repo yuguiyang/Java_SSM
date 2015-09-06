@@ -25,9 +25,16 @@ public class CustomerServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html;charset=utf-8");
 		
+		String act = req.getParameter("act");
 		
 		ICustomerService customerService = new CustomerService();
-		String result = customerService.queryRegisterInfo();
+		String result = "";
+		
+		if("grid".equals(act)) {
+			result = customerService.queryRegisterInfo();
+		} else if("line".equals(act)) {
+			result = customerService.queryRegisterChart();
+		}
 		
 		PrintWriter pw = resp.getWriter();
 		pw.write(result);

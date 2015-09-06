@@ -24,4 +24,21 @@
 		order by 
 			calendar_id desc
     </select>
+    
+    <select id="selectRegisterChart" resultMap="registerMapper">
+    <![CDATA[
+	    select 
+			date(calendar_id) calendar_id ,
+			sum(cust_register_num) cust_register_num,
+			sum(cust_register_num_total) cust_register_num_total
+		from 
+			dm_cust_channel_analyse
+		where 
+			calendar_id not in ('20150823','20150824')
+		group by 
+			calendar_id
+		order by 
+			calendar_id asc
+	 ]]> 
+    </select>
 </mapper> 
