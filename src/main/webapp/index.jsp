@@ -61,21 +61,25 @@
 		    		{field:'totalNum',title:'总注册人数',width:100,align:'right'}
 		        ]]
 		    });
+		   
+		    /////////////////////////////// 各个渠道 注册信息 
+		    var grid_channel;
 		    
-		    var columns_channel = '[[{"field":"channel_name","title":"负责人-渠道名称","width":100}]]';
-            //从后台获取json格式的数据  
-           /* $.getJSON("customer?act=columns" , function(data) {  
-            	columns_channel = data;
-            }); 
-		    */
-		    $('#dg_channel').datagrid({
+		    grid_channel = $('#dg_channel').datagrid({
 		    	title: '各渠道注册人数统计表',
-		        url:'customer?act=grid',
+		        url:'customer?act=channel',
 		        method:'get',
 		        fitColumns: true,
 		        singleSelect: true,
-		        columns: [[{"field":"channel_name","title":"负责人-渠道名称","width":100},{"field":"channel_name","title":"负责人-渠道名称","width":100}]]
+		        columns: [[]]
 		    });
+		    
+            //从后台获取json格式的数据  
+            $.getJSON("customer?act=columns" , function(data) {  
+            	grid_channel.datagrid({ 
+                    columns:[data] 
+                }).datagrid("loadData", data);
+            }); 
 		});
 		
 	</script>
@@ -90,7 +94,7 @@
 		<div id="main" style="width: 900px;height:400px"></div>
 		<table id="dg" style="width: 600px;height:800px;"></table>
 		
-		<table id="dg_channel" style="width: 600px;height:800px;"></table>
+		<table id="dg_channel" style="width: 1200px;height:800px;"></table>
 	</center>
 </body>
 </html>

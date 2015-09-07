@@ -15,6 +15,15 @@
 		<result column="title_id" property="id"/>
 		<result column="title_name" property="name"/>
 	</resultMap>
+	
+	<resultMap type="org.ygy.vo.ChannelInfoVO" id="channelInfoMapper">
+		<result column="channel_id" property="id"/>
+		<result column="channel_show_name" property="showName"/>
+		<result column="channel_show_url" property="showURL"/>
+		<result column="calendar_id" property="calendarId"/>
+		<result column="cust_register_num" property="registerNum"/>
+		<result column="cust_register_num_total" property="totalNum"/>				
+	</resultMap>
   
   	<select id="selectChannels" resultMap="channelMapper">
   		select
@@ -39,6 +48,38 @@
 		order by 
 			calendar_date desc
 	]]> 
+  	</select>
+  	
+  	<select id="selectChannelInfo" resultMap="channelInfoMapper" parameterType="String">
+  	<![CDATA[
+	  	select 
+			tm_channel.channel_id,
+			tm_channel.channel_show_name,
+			tm_channel.channel_show_url,
+			tm_cus.calendar_id,
+			coalesce(tm_cus.cust_register_num,0) cust_register_num,
+			coalesce(tm_cus.cust_register_num_total,0) cust_register_num_total
+		from 
+			dr_bi.v_dim_channel tm_channel
+		left join 
+			dr_bi.dm_cust_channel_analyse tm_cus
+		on 
+			tm_cus.channel_id = tm_channel.channel_id
+		where 
+			tm_channel.channel_id = #{channel_id}#
+		and 
+			tm_cus.calendar_id < '20150907'
+		and 
+			tm_cus.calendar_id >= '20150830'
+		group by 
+			tm_channel.channel_id,
+			tm_channel.channel_show_name,
+			tm_channel.channel_show_url,			
+			tm_cus.calendar_id
+		order by 
+			tm_cus.cust_register_num_total desc,
+			tm_cus.calendar_id desc
+	]]>
   	</select>
     
 </mapper> 

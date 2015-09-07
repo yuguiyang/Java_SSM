@@ -1,15 +1,18 @@
 package org.ygy.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.ygy.entity.ChannelEntity;
 import org.ygy.entity.easyui.ESColumn;
 import org.ygy.entity.echarts.Echart;
 import org.ygy.entity.echarts.Serie;
 import org.ygy.service.ICustomerService;
 import org.ygy.util.MyBatisUtil;
 import org.ygy.vo.BaseVO;
+import org.ygy.vo.ChannelInfoVO;
 import org.ygy.vo.RegisterVO;
 import org.ygy.vo.TitleVO;
 
@@ -69,11 +72,53 @@ public class CustomerService implements ICustomerService {
 	public String queryChannelInfo() {
 		
 		//1. 查询所有渠道信息
-		session = MyBatisUtil.getSession();  
+		session = MyBatisUtil.getSession();
 		
-		//List<RegisterVO> registerList = session.selectList("org.ygy.mapper.CustomerMapper.selectRegisterChart");
+		List<TitleVO> titles = session.selectList("org.ygy.mapper.ChannelMapper.selectColumns");
 		
-		return null;
+		List<TitleVO> preTitles = new ArrayList<TitleVO>();
+		preTitles.add(new TitleVO("channel_name" , "负责人-渠道名称"));
+		preTitles.add(new TitleVO("channel_url" , "链接网址"));
+		preTitles.add(new TitleVO("total_num" , "总注册人数"));
+		
+		titles.addAll(0, preTitles);
+		
+		List<ESColumn> columns = new ArrayList<ESColumn>();
+		
+		for(TitleVO each : titles) {
+			ESColumn column = new ESColumn(each.getId() , each.getName());
+			
+			columns.add(column);
+		}
+		
+		//columns 所有的标题信息
+		//开始遍历 从8月30号开始，左关联所有的数据
+		//所有的渠道
+		List<ChannelEntity> channels = session.selectList("org.ygy.mapper.ChannelMapper.selectChannels");
+		
+		List<HashMap<String,Object>> vos = new ArrayList<HashMap<String,Object>>();
+		for(ChannelEntity each : channels) {
+			List<ChannelInfoVO> channelInfos = session.selectList("org.ygy.mapper.ChannelMapper.selectChannelInfo" , each.getId());
+
+			HashMap<String , Object> datas = new HashMap<String , Object>();
+			datas.put("channel_name", channelInfos.get(0).getShowName());
+			datas.put("channel_url", channelInfos.get(0).getShowURL());
+			datas.put("total_num", channelInfos.get(0).getTotalNum());
+			
+			for(int index=0; index<channelInfos.size(); index++) {
+				//map
+				datas.put(titles.get(index+3).getId(), channelInfos.get(index).getRegisterNum());
+			}
+			vos.add(datas);
+		}
+		
+		BaseVO<HashMap<String,Object>> base = new BaseVO<HashMap<String,Object>>();
+		base.setTotal(vos.size());
+		base.setRows(vos);
+		
+		Gson gson = new Gson();
+		
+		return gson.toJson(base);
 	}
 
 	@Override
