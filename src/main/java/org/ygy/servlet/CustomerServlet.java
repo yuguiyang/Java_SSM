@@ -31,7 +31,10 @@ public class CustomerServlet extends HttpServlet {
 		String result = "";
 		
 		if("grid".equals(act)) {
-			result = customerService.queryRegisterInfo();
+			Integer page = Integer.parseInt(req.getParameter("page"));
+			Integer rows = Integer.parseInt(req.getParameter("rows"));
+			
+			result = customerService.queryRegisterInfo(page , rows);
 		} else if("line".equals(act)) {
 			result = customerService.queryRegisterChart();
 		} else if("channel".equals(act)) {

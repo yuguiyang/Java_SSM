@@ -10,9 +10,24 @@
 		<result column="cust_register_num" property="todayAddNum"/>
 		<result column="cust_register_num_total" property="totalNum"/>
 	</resultMap>
-  
+
+    <select id="selectRegisterPage" resultType="int">
+    	select count(1) from (
+		    select 
+				date(calendar_id) calendar_id ,
+				sum(cust_register_num) cust_register_num,
+				sum(cust_register_num_total) cust_register_num_total
+			from 
+				dm_cust_channel_analyse
+			group by 
+				calendar_id
+			order by 
+				calendar_id desc
+		) tm
+    </select>
+      
     
-    <select id="selectRegister" resultMap="registerMapper">
+    <select id="selectRegister" resultMap="registerMapper" parameterType="Map">
 	    select 
 			date(calendar_id) calendar_id ,
 			sum(cust_register_num) cust_register_num,
@@ -23,6 +38,7 @@
 			calendar_id
 		order by 
 			calendar_id desc
+		limit #{page},#{rows}
     </select>
     
     <select id="selectRegisterChart" resultMap="registerMapper">

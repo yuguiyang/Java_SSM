@@ -50,10 +50,15 @@
 		$(document).ready(function() {
 		    $('#dg').datagrid({
 		    	title: '全站注册人数统计表',
+		    	width: 700,
+		    	height: 600,
 		        url:'customer?act=grid',
 		        method:'get',
 		        fitColumns: true,
 		        singleSelect: true,
+		        striped: true,
+		        pagination: true,
+		        pageSize: 20,//每页显示的记录条数，默认为10 
 		        columns:[[
 		    		{field:'calendarId',title:'日期',width:100},
 		    		//对数字进行千分位转换格式
@@ -61,6 +66,15 @@
 		    		{field:'totalNum',title:'总注册人数',width:100,align:'right'}
 		        ]]
 		    });
+		    
+            //设置分页控件       
+            var p = $('#dg').datagrid('getPager');       
+            $(p).pagination({           
+                pageSize: 20,//每页显示的记录条数，默认为10           
+                beforePageText: '第  ',//页数文本框前显示的汉字           
+                afterPageText: '页    共 {pages} 页',           
+                displayMsg: '当前显示 {from} - {to} 条记录   共 {total} 条记录'                
+            });		    
 		   
 		    /////////////////////////////// 各个渠道 注册信息 
 		    var grid_channel;
@@ -92,7 +106,7 @@
 	
 		<h1>全站注册人数统计表</h1>
 		<div id="main" style="width: 900px;height:400px"></div>
-		<table id="dg" style="width: 600px;height:800px;"></table>
+		<table id="dg" ></table>
 		
 		<table id="dg_channel" style="width: 1200px;height:800px;"></table>
 	</center>

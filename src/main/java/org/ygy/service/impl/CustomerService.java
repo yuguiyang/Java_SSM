@@ -3,6 +3,7 @@ package org.ygy.service.impl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.ygy.entity.ChannelEntity;
@@ -22,12 +23,20 @@ public class CustomerService implements ICustomerService {
 	private SqlSession session = null;  
 	
 	@Override
-	public String queryRegisterInfo() {
+	public String queryRegisterInfo(Integer page, Integer rows) {
 		session = MyBatisUtil.getSession();
-		List<RegisterVO> registerList = session.selectList("org.ygy.mapper.CustomerMapper.selectRegister");
 		
 		BaseVO<RegisterVO> base = new BaseVO<RegisterVO>();
-		base.setTotal(registerList.size());
+
+		int total = session.selectOne("org.ygy.mapper.CustomerMapper.selectRegisterPage");
+		base.setTotal(total);
+
+		Map<String, Integer> params = new HashMap<String , Integer>();
+		params.put("page", rows*(page-1));
+		params.put("rows", rows);
+		
+		List<RegisterVO> registerList = session.selectList("org.ygy.mapper.CustomerMapper.selectRegister",params);
+		
 		base.setRows(registerList);
 		
 		Gson gson = new Gson();
