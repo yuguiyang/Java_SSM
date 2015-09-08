@@ -15,28 +15,35 @@ public class ChannelDao implements IChannelDao {
 
 	@Override
 	public List<ESColumn> selectChannelColumns() {
+		long start = System.currentTimeMillis();
 		session = MyBatisUtil.getSession();
 		
 		List<ESColumn> columns = session.selectList(Mappers.CHANNEL + "selectColumns");		
-		
+		long end = System.currentTimeMillis();
+		System.out.println("dao selectChannelColumns 耗时:" +(end-start)/1000);			
 		return columns;
 	}
 
 	@Override
 	public List<ChannelEntity> selectChannels() {
+		long start = System.currentTimeMillis();
 		session = MyBatisUtil.getSession();
 		
 		List<ChannelEntity> channels = session.selectList(Mappers.CHANNEL + "selectChannels");
-		
+		long end = System.currentTimeMillis();
+		System.out.println("dao selectChannels 耗时:" +(end-start)/1000);			
 		return channels;
 	}
 
 	@Override
 	public List<ChannelInfoVO> selectChannelInfo(String id) {
+		long start = System.currentTimeMillis();		
 		session = MyBatisUtil.getSession();
 		
 		List<ChannelInfoVO> channelInfos = session.selectList(Mappers.CHANNEL + "selectChannelInfo" , id);
-		
+
+		long end = System.currentTimeMillis();
+		System.out.println("dao selectChannelInfo 耗时:" +(end-start)/1000);			
 		return channelInfos;
 	}  
 	
