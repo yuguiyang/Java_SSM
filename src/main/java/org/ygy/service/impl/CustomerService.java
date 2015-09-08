@@ -15,7 +15,6 @@ import org.ygy.util.MyBatisUtil;
 import org.ygy.vo.BaseVO;
 import org.ygy.vo.ChannelInfoVO;
 import org.ygy.vo.RegisterVO;
-import org.ygy.vo.TitleVO;
 
 import com.google.gson.Gson;
 
@@ -78,27 +77,38 @@ public class CustomerService implements ICustomerService {
 	}
 
 	@Override
+	public String queryColumns() {
+		session = MyBatisUtil.getSession(); 
+		
+		//标题
+		List<ESColumn> columns = session.selectList("org.ygy.mapper.ChannelMapper.selectColumns");
+		
+		List<ESColumn> preColumns = new ArrayList<ESColumn>();
+		preColumns.add(new ESColumn("channel_name" , "负责人-渠道名称",200));
+		preColumns.add(new ESColumn("channel_url" , "链接网址",300));
+		preColumns.add(new ESColumn("total_num" , "总注册人数"));
+		
+		columns.addAll(0, preColumns);
+		
+		Gson gson = new Gson();
+		
+		return gson.toJson(columns);
+	}
+	
+	@Override
 	public String queryChannelInfo() {
 		
 		//1. 查询所有渠道信息
 		session = MyBatisUtil.getSession();
 		
-		List<TitleVO> titles = session.selectList("org.ygy.mapper.ChannelMapper.selectColumns");
+		List<ESColumn> columns = session.selectList("org.ygy.mapper.ChannelMapper.selectColumns");
 		
-		List<TitleVO> preTitles = new ArrayList<TitleVO>();
-		preTitles.add(new TitleVO("channel_name" , "负责人-渠道名称"));
-		preTitles.add(new TitleVO("channel_url" , "链接网址"));
-		preTitles.add(new TitleVO("total_num" , "总注册人数"));
+		List<ESColumn> preColumns = new ArrayList<ESColumn>();
+		preColumns.add(new ESColumn("channel_name" , "负责人-渠道名称"));
+		preColumns.add(new ESColumn("channel_url" , "链接网址"));
+		preColumns.add(new ESColumn("total_num" , "总注册人数"));
 		
-		titles.addAll(0, preTitles);
-		
-		List<ESColumn> columns = new ArrayList<ESColumn>();
-		
-		for(TitleVO each : titles) {
-			ESColumn column = new ESColumn(each.getId() , each.getName());
-			
-			columns.add(column);
-		}
+		columns.addAll(0, preColumns);
 		
 		//columns 所有的标题信息
 		//开始遍历 从8月30号开始，左关联所有的数据
@@ -116,7 +126,8 @@ public class CustomerService implements ICustomerService {
 			
 			for(int index=0; index<channelInfos.size(); index++) {
 				//map
-				datas.put(titles.get(index+3).getId(), channelInfos.get(index).getRegisterNum());
+				datas.put(columns.get(index+3).getField(), channelInfos.get(index).getRegisterNum());
+				System.out.println(columns.get(index+3).getField() + "-->"+ channelInfos.get(index).getRegisterNum());
 			}
 			vos.add(datas);
 		}
@@ -130,31 +141,6 @@ public class CustomerService implements ICustomerService {
 		return gson.toJson(base);
 	}
 
-	@Override
-	public String queryColumns() {
-		session = MyBatisUtil.getSession(); 
-		
-		//标题
-		List<TitleVO> titles = session.selectList("org.ygy.mapper.ChannelMapper.selectColumns");
-		
-		List<TitleVO> preTitles = new ArrayList<TitleVO>();
-		preTitles.add(new TitleVO("channel_name" , "负责人-渠道名称"));
-		preTitles.add(new TitleVO("channel_url" , "链接网址"));
-		preTitles.add(new TitleVO("total_num" , "总注册人数"));
-		
-		titles.addAll(0, preTitles);
-		
-		List<ESColumn> columns = new ArrayList<ESColumn>();
-		
-		for(TitleVO each : titles) {
-			ESColumn column = new ESColumn(each.getId() , each.getName());
-			
-			columns.add(column);
-		}
-		
-		Gson gson = new Gson();
-		
-		return gson.toJson(columns);
-	}
+
 
 }

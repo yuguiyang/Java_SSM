@@ -14,6 +14,12 @@ public class ESColumn {
 		this.title = title;
 	}
 	
+	public ESColumn(String field, String title, Integer width) {
+		this.field = field;
+		this.title = title;
+		this.width = width;
+	}	
+	
 	public ESColumn(String field, String title, Integer width, String align) {
 		this.field = field;
 		this.title = title;

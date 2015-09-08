@@ -16,6 +16,11 @@
 		<result column="title_name" property="name"/>
 	</resultMap>
 	
+	<resultMap type="org.ygy.entity.easyui.ESColumn" id="esColumnMapper">
+		<result column="field" property="field"></result>
+		<result column="title" property="title"></result>
+	</resultMap>
+	
 	<resultMap type="org.ygy.vo.ChannelInfoVO" id="channelInfoMapper">
 		<result column="channel_id" property="id"/>
 		<result column="channel_show_name" property="showName"/>
@@ -26,27 +31,38 @@
 	</resultMap>
   
   	<select id="selectChannels" resultMap="channelMapper">
-  		select
-	 		 channel_id,
-	 		 channel_show_name,
-	 		 channel_show_url
-  		from
-  			dr_bi.v_dim_channel 
+		select 
+			tm_channel.channel_id,
+			tm_channel.channel_show_name,
+			tm_channel.channel_show_url
+		from 
+			dr_bi.v_dim_channel tm_channel
+		left join 
+			dr_bi.dm_cust_channel_analyse tm_cus
+		on 
+			tm_cus.channel_id = tm_channel.channel_id
+		where 
+			tm_cus.calendar_id =  (select max(calendar_id) from dr_bi.dm_cust_channel_analyse)
+			
+		order by 
+			tm_cus.cust_register_num desc,
+			tm_channel.channel_id desc 
   	</select>
   	
-  	<select id="selectColumns" resultMap="titleMapper">
+  	<select id="selectColumns" resultMap="esColumnMapper">
   	<![CDATA[
-  		select 
-  			calendar_id title_id,
-  			date_format(calendar_date,'%m月%d日') title_name
-  		from 
-  			dm_calendar 
-  		where 
-  			calendar_id>=20150830 
-  		and 
-  			calendar_date<date(now())
+		select 
+			calendar_id field,
+			date_format(calendar_id,'%m月%d日') title
+		from 
+			dr_bi.dm_cust_channel_analyse
+		where 
+			calendar_id>=20150830 
+		group by 
+			calendar_id,
+			date_format(calendar_id,'%m月%d日')
 		order by 
-			calendar_date desc
+			calendar_id desc
 	]]> 
   	</select>
   	
@@ -67,8 +83,6 @@
 			tm_cus.channel_id = tm_channel.channel_id
 		where 
 			tm_channel.channel_id = #{channel_id}#
-		and 
-			tm_cus.calendar_id < '20150907'
 		and 
 			tm_cus.calendar_id >= '20150830'
 		group by 

@@ -35,8 +35,8 @@ body {
   text-size-adjust: 100%;
   background: #444 url("debut_dark.png") repeat;
   color: #666;
-  font: normal 100%/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+  #font: normal 100%/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 h1 {
   font-size: 3em;
