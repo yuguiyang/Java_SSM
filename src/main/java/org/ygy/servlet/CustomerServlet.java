@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ygy.service.IChannelService;
 import org.ygy.service.ICustomerService;
+import org.ygy.service.impl.ChannelService;
 import org.ygy.service.impl.CustomerService;
 
 public class CustomerServlet extends HttpServlet {
@@ -28,6 +30,8 @@ public class CustomerServlet extends HttpServlet {
 		String act = req.getParameter("act");
 		
 		ICustomerService customerService = new CustomerService();
+		IChannelService channelService = new ChannelService();
+		
 		String result = "";
 		
 		if("grid".equals(act)) {
@@ -38,9 +42,9 @@ public class CustomerServlet extends HttpServlet {
 		} else if("line".equals(act)) {
 			result = customerService.queryRegisterChart();
 		} else if("channel".equals(act)) {
-			result = customerService.queryChannelInfo();
+			result = channelService.queryChannelInfo();
 		} else if ("columns".equals(act)) {
-			result = customerService.queryColumns();
+			result = channelService.queryColumns();
 		}
 		
 		PrintWriter pw = resp.getWriter();

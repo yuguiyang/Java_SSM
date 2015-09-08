@@ -1,53 +1,38 @@
 package org.ygy.service.impl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
-import org.ygy.entity.ChannelEntity;
-import org.ygy.entity.easyui.ESColumn;
+import org.ygy.dao.ICustomerDao;
+import org.ygy.dao.impl.CustomerDao;
 import org.ygy.entity.echarts.Echart;
 import org.ygy.entity.echarts.Serie;
 import org.ygy.service.ICustomerService;
-import org.ygy.util.MyBatisUtil;
+import org.ygy.util.GsonUtil;
 import org.ygy.vo.BaseVO;
-import org.ygy.vo.ChannelInfoVO;
 import org.ygy.vo.RegisterVO;
 
-import com.google.gson.Gson;
-
 public class CustomerService implements ICustomerService {
-	private SqlSession session = null;  
+	private ICustomerDao customerDao = new CustomerDao();
 	
 	@Override
 	public String queryRegisterInfo(Integer page, Integer rows) {
-		session = MyBatisUtil.getSession();
-		
+
 		BaseVO<RegisterVO> base = new BaseVO<RegisterVO>();
-
-		int total = session.selectOne("org.ygy.mapper.CustomerMapper.selectRegisterPage");
+		
+		int total = customerDao.selectRegisterCount(page , rows);
 		base.setTotal(total);
-
-		Map<String, Integer> params = new HashMap<String , Integer>();
-		params.put("page", rows*(page-1));
-		params.put("rows", rows);
 		
-		List<RegisterVO> registerList = session.selectList("org.ygy.mapper.CustomerMapper.selectRegister",params);
-		
+		List<RegisterVO> registerList = customerDao.selectRegisters(page , rows); 
 		base.setRows(registerList);
 		
-		Gson gson = new Gson();
-		
-		return gson.toJson(base);
+		return GsonUtil.toJson(base);
 	}
 
 	@Override
 	public String queryRegisterChart() {
-		session = MyBatisUtil.getSession();  
 		
-		List<RegisterVO> registerList = session.selectList("org.ygy.mapper.CustomerMapper.selectRegisterChart");
+		List<RegisterVO> registerList = customerDao.selectRegisterChart();
 		
 		String[] names = new String[registerList.size()];
 		Integer[] datas = new Integer[registerList.size()];
@@ -70,76 +55,8 @@ public class CustomerService implements ICustomerService {
 		
 		echart.setSeries(series);
 		
-		
-		Gson gson = new Gson();
-		
-		return gson.toJson(echart);
+		return GsonUtil.toJson(echart);
 	}
-
-	@Override
-	public String queryColumns() {
-		session = MyBatisUtil.getSession(); 
-		
-		//标题
-		List<ESColumn> columns = session.selectList("org.ygy.mapper.ChannelMapper.selectColumns");
-		
-		List<ESColumn> preColumns = new ArrayList<ESColumn>();
-		preColumns.add(new ESColumn("channel_name" , "负责人-渠道名称",200));
-		preColumns.add(new ESColumn("channel_url" , "链接网址",300));
-		preColumns.add(new ESColumn("total_num" , "总注册人数"));
-		
-		columns.addAll(0, preColumns);
-		
-		Gson gson = new Gson();
-		
-		return gson.toJson(columns);
-	}
-	
-	@Override
-	public String queryChannelInfo() {
-		
-		//1. 查询所有渠道信息
-		session = MyBatisUtil.getSession();
-		
-		List<ESColumn> columns = session.selectList("org.ygy.mapper.ChannelMapper.selectColumns");
-		
-		List<ESColumn> preColumns = new ArrayList<ESColumn>();
-		preColumns.add(new ESColumn("channel_name" , "负责人-渠道名称"));
-		preColumns.add(new ESColumn("channel_url" , "链接网址"));
-		preColumns.add(new ESColumn("total_num" , "总注册人数"));
-		
-		columns.addAll(0, preColumns);
-		
-		//columns 所有的标题信息
-		//开始遍历 从8月30号开始，左关联所有的数据
-		//所有的渠道
-		List<ChannelEntity> channels = session.selectList("org.ygy.mapper.ChannelMapper.selectChannels");
-		
-		List<HashMap<String,Object>> vos = new ArrayList<HashMap<String,Object>>();
-		for(ChannelEntity each : channels) {
-			List<ChannelInfoVO> channelInfos = session.selectList("org.ygy.mapper.ChannelMapper.selectChannelInfo" , each.getId());
-
-			HashMap<String , Object> datas = new HashMap<String , Object>();
-			datas.put("channel_name", channelInfos.get(0).getShowName());
-			datas.put("channel_url", channelInfos.get(0).getShowURL());
-			datas.put("total_num", channelInfos.get(0).getTotalNum());
-			
-			for(int index=0; index<channelInfos.size(); index++) {
-				//map
-				datas.put(columns.get(index+3).getField(), channelInfos.get(index).getRegisterNum());
-			}
-			vos.add(datas);
-		}
-		
-		BaseVO<HashMap<String,Object>> base = new BaseVO<HashMap<String,Object>>();
-		base.setTotal(vos.size());
-		base.setRows(vos);
-		
-		Gson gson = new Gson();
-		
-		return gson.toJson(base);
-	}
-
 
 
 }
