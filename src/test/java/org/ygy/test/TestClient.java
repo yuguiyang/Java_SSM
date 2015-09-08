@@ -37,7 +37,6 @@ public class TestClient {
 	        }  
 	    }  
 	      
-	    @Test  
 	    public void testSelectUser() {  
 	        List<UserEntity> userList = session.selectList("org.ygy.mapper.UserMapper.selectUser");  
 	          

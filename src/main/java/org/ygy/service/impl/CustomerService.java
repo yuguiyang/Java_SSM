@@ -127,7 +127,6 @@ public class CustomerService implements ICustomerService {
 			for(int index=0; index<channelInfos.size(); index++) {
 				//map
 				datas.put(columns.get(index+3).getField(), channelInfos.get(index).getRegisterNum());
-				System.out.println(columns.get(index+3).getField() + "-->"+ channelInfos.get(index).getRegisterNum());
 			}
 			vos.add(datas);
 		}
