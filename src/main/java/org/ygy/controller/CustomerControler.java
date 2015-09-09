@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.ygy.entity.PageSearch;
 import org.ygy.service.ICustomerService;
 
 @Controller
@@ -24,9 +25,9 @@ public class CustomerControler {
 	
 	@ResponseBody
 	@RequestMapping(value = "/grid" ,produces="text/html;charset=UTF-8")	
-	public String grid(Integer page , Integer rows) {
+	public String grid(PageSearch pageSearch) {
 		
-		String result = customerService.queryRegisterInfo(page , rows);
+		String result = customerService.queryRegisterInfo(pageSearch);
 		
 		return result;
 	}

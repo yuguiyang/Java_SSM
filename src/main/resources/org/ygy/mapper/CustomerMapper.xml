@@ -11,7 +11,7 @@
 		<result column="cust_register_num_total" property="totalNum"/>
 	</resultMap>
 
-    <select id="selectRegisterPage" resultType="int">
+    <select id="selectRegisterPage" parameterType="org.ygy.entity.PageSearch" resultType="int">
     	select count(1) from (
 		    select 
 				date(calendar_id) calendar_id ,
@@ -19,6 +19,16 @@
 				sum(cust_register_num_total) cust_register_num_total
 			from 
 				dm_cust_channel_analyse
+			<where>
+		        <if test="startDate != null">
+		            and date(calendar_id) >= date(#{startDate}) 
+		        </if>
+		        <if test="endDate != null">
+    			<![CDATA[
+		            and date(calendar_id) < date(#{endDate})
+				]]>
+		        </if>
+		    </where>
 			group by 
 				calendar_id
 			order by 
@@ -27,18 +37,29 @@
     </select>
       
     
-    <select id="selectRegister" resultMap="registerMapper" parameterType="Map">
-	    select 
-			date(calendar_id) calendar_id ,
-			sum(cust_register_num) cust_register_num,
-			sum(cust_register_num_total) cust_register_num_total
-		from 
-			dm_cust_channel_analyse
-		group by 
-			calendar_id
-		order by 
-			calendar_id desc
-		limit #{page},#{rows}
+    <select id="selectRegister" resultMap="registerMapper" parameterType="org.ygy.entity.PageSearch">
+		    select 
+				date(calendar_id) calendar_id ,
+				sum(cust_register_num) cust_register_num,
+				sum(cust_register_num_total) cust_register_num_total
+			from 
+				dm_cust_channel_analyse
+			<where>
+		        <if test="startDate != null">
+		            and date(calendar_id) >= date(#{startDate}) 
+		        </if>
+		        <if test="endDate != null">
+    			<![CDATA[
+		         
+		            and date(calendar_id) < date(#{endDate})
+				]]>
+		        </if>
+		    </where>
+			group by 
+				calendar_id
+			order by 
+				calendar_id desc
+			limit #{page},#{rows}
     </select>
     
     <select id="selectRegisterChart" resultMap="registerMapper">

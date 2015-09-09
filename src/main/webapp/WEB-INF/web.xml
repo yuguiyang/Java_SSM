@@ -36,6 +36,7 @@
 		<url-pattern>/echarts/*</url-pattern>
 		<url-pattern>/nav/*</url-pattern>
 		<url-pattern>/js/*</url-pattern>
+		<url-pattern>/images/*</url-pattern>
 	</servlet-mapping>
 
 

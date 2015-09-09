@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="images/favicon.ico" />
 <title>BI报表平台</title>
 
 
@@ -50,18 +51,16 @@
 				
 				<div id="d_register_chart" style="width: 1000px; height: 600px"></div>
 				
-				<div id="div_form" style="">
-					<span>部门：</span><input id="channel_type" class="easyui-combobox"
-						name="channel_type"
-						data-options="valueField:'type',textField:'type',url:'channel/type'">
+				<div id="div_customer_form" style="">
 						
 					<span>开始时间：</span><input class="easyui-datebox"
 						data-options="formatter:myformatter,parser:myparser"
-						id="start_date"></input> 
+						name="cus_start_date"></input> 
 						
 					<span>结束时间：</span><input
 						class="easyui-datebox"
-						data-options="formatter:myformatter,parser:myparser" id="end_date"></input>
+						data-options="formatter:myformatter,parser:myparser" name="cus_end_date"></input>
+						
 					<input type="button" id="channel_type_query" value="查询"/>
 				</div>
 				
@@ -70,6 +69,22 @@
 			
 			<div id="d_report_channel" style="display:none;" class="main">
 			
+				<div id="div_channel_form" style="">
+					<span>部门：</span><input class="easyui-combobox"
+						name="chl_channel_type"
+						data-options="valueField:'type',textField:'type',url:'channel/type'">
+						
+					<span>开始时间：</span><input class="easyui-datebox"
+						data-options="formatter:myformatter,parser:myparser"
+						name="chl_start_date"></input> 
+						
+					<span>结束时间：</span><input
+						class="easyui-datebox"
+						data-options="formatter:myformatter,parser:myparser" name="chl_end_date"></input>
+						
+					<input type="button" id="chl_query" value="查询"/>
+				</div>
+							
 				<table id="dg_channel" style="width: 1300px;height:800px;"></table>
 				
 			</div>

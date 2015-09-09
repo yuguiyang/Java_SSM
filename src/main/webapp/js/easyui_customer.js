@@ -3,6 +3,19 @@ $(document).ready(function() {
 	//全局变量 
 	var local_load = false;
 	
+	//查询按钮 事件监听
+	$("#cus_query").click(function() {
+		
+		var start_date=$("[name='cus_start_date']").val();
+		var end_date=$("[name='cus_end_date']").val();
+		
+		//获取参数 数据
+	    $('#t_register_grid').datagrid('load', {
+	        startDate: start_date,
+	        endDate: end_date
+	    });		
+		
+	});
 	
     
 	/*

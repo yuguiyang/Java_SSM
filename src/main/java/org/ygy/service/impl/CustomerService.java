@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.ygy.dao.ICustomerDao;
+import org.ygy.entity.PageSearch;
 import org.ygy.entity.echarts.Echart;
 import org.ygy.entity.echarts.Serie;
 import org.ygy.service.ICustomerService;
@@ -20,14 +21,14 @@ public class CustomerService implements ICustomerService {
 	private ICustomerDao customerDao;
 	
 	@Override
-	public String queryRegisterInfo(Integer page, Integer rows) {
+	public String queryRegisterInfo(PageSearch pageSearch) {
 
 		BaseVO<RegisterVO> base = new BaseVO<RegisterVO>();
 		
-		int total = customerDao.selectRegisterCount(page , rows);
+		int total = customerDao.selectRegisterCount(pageSearch);
 		base.setTotal(total);
 		
-		List<RegisterVO> registerList = customerDao.selectRegisters(page , rows); 
+		List<RegisterVO> registerList = customerDao.selectRegisters(pageSearch); 
 		base.setRows(registerList);
 		
 		return GsonUtil.toJson(base);

@@ -1,5 +1,7 @@
 package org.ygy.service;
 
+import org.ygy.entity.PageSearch;
+
 public interface ICustomerService {
 	
 	/**
@@ -8,7 +10,7 @@ public interface ICustomerService {
 	 * @param rows 每页显示数量
 	 * @return
 	 */
-	public String queryRegisterInfo(Integer page, Integer rows);
+	public String queryRegisterInfo(PageSearch pageSearch);
 
 	/**
 	 * 查询注册图表
