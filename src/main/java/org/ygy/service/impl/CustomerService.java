@@ -3,8 +3,9 @@ package org.ygy.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.ygy.dao.ICustomerDao;
-import org.ygy.dao.impl.CustomerDao;
 import org.ygy.entity.echarts.Echart;
 import org.ygy.entity.echarts.Serie;
 import org.ygy.service.ICustomerService;
@@ -12,8 +13,11 @@ import org.ygy.util.GsonUtil;
 import org.ygy.vo.BaseVO;
 import org.ygy.vo.RegisterVO;
 
+@Service("customerService")
 public class CustomerService implements ICustomerService {
-	private ICustomerDao customerDao = new CustomerDao();
+	
+	@Autowired
+	private ICustomerDao customerDao;
 	
 	@Override
 	public String queryRegisterInfo(Integer page, Integer rows) {

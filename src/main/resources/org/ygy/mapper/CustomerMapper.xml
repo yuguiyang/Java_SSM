@@ -49,8 +49,6 @@
 			sum(cust_register_num_total) cust_register_num_total
 		from 
 			dm_cust_channel_analyse
-		where 
-			calendar_id not in ('20150823','20150824')
 		group by 
 			calendar_id
 		order by 

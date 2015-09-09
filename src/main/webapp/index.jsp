@@ -122,7 +122,7 @@
 		    
 		    grid_channel = $('#dg_channel').datagrid({
 		    	title: '各渠道注册人数统计表',
-		        url:'customer?act=channel',
+		        //url:'customer?act=channel',
 		        method:'get',
 		        fitColumns: true,
 		        singleSelect: true,
@@ -154,12 +154,13 @@
             	 
             	//动态加载数据 
  				if(!local_load) {
+ 					$('#dg_channel').datagrid('load','customer?act=channel');
  					
  		           	//动态加载Grid的列   
  		            $.getJSON("customer?act=columns" , function(data) {  
  		            	grid_channel.datagrid({ 
  		                    columns:[data] 
- 		                }).datagrid("loadData", data);
+ 		                });//.datagrid("loadData", data);
  		            	
  						//可以获取标题 信息 
  					    var columns = grid_channel.datagrid("options").columns;
@@ -175,7 +176,7 @@
  		            	
  		            });
  		           	
- 					$('#dg_channel').datagrid('load','customer?act=channel');
+ 					
  					local_load = true;
  				} 
             	
