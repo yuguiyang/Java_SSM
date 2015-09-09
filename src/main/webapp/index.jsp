@@ -51,7 +51,7 @@
 	                var myChart = ec.init(document.getElementById('d_register_chart')); 
 	                
 	                //从后台获取json格式的数据  
-	                $.getJSON("customer?act=line" , function(data) {  
+	                $.getJSON("customer/trend" , function(data) {  
 	                    //初始化chart  
 	                    // 为echarts对象加载数据 
 	                    myChart.setOption(data); 
@@ -68,7 +68,7 @@
 		    	title: '全站注册人数统计表',
 		    	width: '900px',
 		    	height: '600px',
-		        url:'customer?act=grid',
+		        url:'customer/grid',
 		        method:'get',
 		        //fitColumns: true,
 		        striped: true,
@@ -154,10 +154,10 @@
             	 
             	//动态加载数据 
  				if(!local_load) {
- 					$('#dg_channel').datagrid('load','customer?act=channel');
+ 					$('#dg_channel').datagrid('load','channel/channel');
  					
  		           	//动态加载Grid的列   
- 		            $.getJSON("customer?act=columns" , function(data) {  
+ 		            $.getJSON("channel/columns" , function(data) {  
  		            	grid_channel.datagrid({ 
  		                    columns:[data] 
  		                });//.datagrid("loadData", data);

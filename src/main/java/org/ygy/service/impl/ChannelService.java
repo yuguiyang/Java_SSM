@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.ygy.dao.IChannelDao;
-import org.ygy.dao.impl.ChannelDao;
 import org.ygy.entity.ChannelEntity;
 import org.ygy.entity.easyui.ESColumn;
 import org.ygy.service.IChannelService;
@@ -13,30 +14,28 @@ import org.ygy.util.GsonUtil;
 import org.ygy.vo.BaseVO;
 import org.ygy.vo.ChannelInfoVO;
 
+@Service("channelService")
 public class ChannelService implements IChannelService {
-	private IChannelDao channelDao = new ChannelDao();
+	
+	@Autowired
+	private IChannelDao channelDao;
 
 	public List<ESColumn> packageColumns(List<ESColumn> columns) {
-		long start = System.currentTimeMillis();
 		List<ESColumn> preColumns = new ArrayList<ESColumn>();
 		preColumns.add(new ESColumn("channel_name" , "负责人-渠道名称",200));
 		preColumns.add(new ESColumn("channel_url" , "链接网址",200));
 		preColumns.add(new ESColumn("total_num" , "总注册人数"));
 		
 		columns.addAll(0, preColumns);	
-		long end = System.currentTimeMillis();
-		System.out.println("service packageColumns 耗时:" +(end-start)/1000);
 		
 		return columns;
 	}
 	
 	@Override
 	public String queryColumns() {
-		long start = System.currentTimeMillis();
 		//标题
 		List<ESColumn> columns = packageColumns(channelDao.selectChannelColumns()); 
-		long end = System.currentTimeMillis();
-		System.out.println("service queryColumns 耗时:" +(end-start)/1000);	
+
 		return GsonUtil.toJson(columns);
 	}
 	
@@ -44,7 +43,6 @@ public class ChannelService implements IChannelService {
 	
 	@Override
 	public String queryChannelInfo() {
-		long start = System.currentTimeMillis();	
 		//1. 查询所有渠道信息
 		List<ESColumn> columns = packageColumns(channelDao.selectChannelColumns()); 
 		
@@ -73,9 +71,6 @@ public class ChannelService implements IChannelService {
 		base.setTotal(vos.size());
 		base.setRows(vos);
 
-		long end = System.currentTimeMillis();
-		System.out.println("service queryChannelInfo 耗时:" +(end-start)/1000);
-		
 		return GsonUtil.toJson(base);
 	}
 }

@@ -55,5 +55,9 @@
 	<bean id="customerdDao" class="org.ygy.dao.impl.CustomerDao">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 	</bean>
+	
+	<bean id="channelDao" class="org.ygy.dao.impl.ChannelDao">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>	
     
 </beans>

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.ygy.service.ICustomerService;
 
 @Controller
@@ -15,11 +14,20 @@ public class CustomerControler {
 	private ICustomerService customerService;
 
 	@ResponseBody
-	@RequestMapping("/queryUser")
-	public ModelAndView queryUser(String id) {
+	@RequestMapping(value = "/trend" ,produces="text/html;charset=UTF-8")
+	public String trend() {
 		
-		customerService.queryRegisterInfo(1, 10);
+		String result = customerService.queryRegisterChart();
 		
-		return new ModelAndView("index" , "one" , "two");
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/grid" ,produces="text/html;charset=UTF-8")	
+	public String grid(Integer page , Integer rows) {
+		
+		String result = customerService.queryRegisterInfo(page , rows);
+		
+		return result;
 	}
 }
