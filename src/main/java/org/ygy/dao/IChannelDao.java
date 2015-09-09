@@ -30,4 +30,10 @@ public interface IChannelDao {
 	 */
 	public List<ChannelInfoVO> selectChannelInfo(String id);
 
+	/**
+	 * 获取渠道所有的类型
+	 * @return
+	 */
+	public List<ChannelEntity> selectChannelTypes();
+
 }

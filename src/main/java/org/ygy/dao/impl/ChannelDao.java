@@ -33,6 +33,14 @@ public class ChannelDao extends SqlSessionDaoSupport  implements IChannelDao {
 		List<ChannelInfoVO> channelInfos = getSqlSession().selectList(Mappers.CHANNEL + "selectChannelInfo" , id);
 
 		return channelInfos;
+	}
+
+	@Override
+	public List<ChannelEntity> selectChannelTypes() {
+		
+		List<ChannelEntity> channels = getSqlSession().selectList(Mappers.CHANNEL + "selectChannelType");
+		
+		return channels;
 	}  
 	
 	

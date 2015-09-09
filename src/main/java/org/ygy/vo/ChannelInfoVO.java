@@ -3,6 +3,7 @@ package org.ygy.vo;
 public class ChannelInfoVO {
 
 	private int id;
+	private String type;
 	private String showName;
 	private String showURL;
 	private String calendarId;
@@ -15,6 +16,15 @@ public class ChannelInfoVO {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getShowName() {

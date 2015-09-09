@@ -5,6 +5,7 @@ public class ChannelEntity {
 	private String id;
 	private String name;
 	private String url;
+	private String type;
 
 	public String getId() {
 		return id;
@@ -30,4 +31,12 @@ public class ChannelEntity {
 		this.url = url;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 }

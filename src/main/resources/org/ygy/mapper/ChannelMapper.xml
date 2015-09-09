@@ -9,11 +9,7 @@
 		<result column="channel_id" property="id"/>
 		<result column="channel_show_name" property="name"/>
 		<result column="channel_show_url" property="url"/>
-	</resultMap>
-	
-	<resultMap type="org.ygy.vo.TitleVO" id="titleMapper">
-		<result column="title_id" property="id"/>
-		<result column="title_name" property="name"/>
+		<result column="channel_type" property="type"></result>
 	</resultMap>
 	
 	<resultMap type="org.ygy.entity.easyui.ESColumn" id="esColumnMapper">
@@ -94,6 +90,18 @@
 			tm_cus.cust_register_num_total desc,
 			tm_cus.calendar_id desc
 	]]>
+  	</select>
+  	
+  	
+  	<select id="selectChannelType" resultMap="channelMapper">
+		select 
+			org_name channel_type
+		from 
+			dr_bi.b_dim_channel
+		where 
+			org_name is not null
+		group by 
+			org_name
   	</select>
     
 </mapper> 

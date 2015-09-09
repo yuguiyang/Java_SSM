@@ -73,4 +73,12 @@ public class ChannelService implements IChannelService {
 
 		return GsonUtil.toJson(base);
 	}
+
+	@Override
+	public String queryChannelType() {
+		
+		List<ChannelEntity> channelTypes = channelDao.selectChannelTypes();
+		
+		return GsonUtil.toJson(channelTypes);
+	}
 }

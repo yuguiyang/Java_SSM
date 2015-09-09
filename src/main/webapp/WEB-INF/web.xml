@@ -35,6 +35,7 @@
 		<url-pattern>/easyui/*</url-pattern>
 		<url-pattern>/echarts/*</url-pattern>
 		<url-pattern>/nav/*</url-pattern>
+		<url-pattern>/js/*</url-pattern>
 	</servlet-mapping>
 
 

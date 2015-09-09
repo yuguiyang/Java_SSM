@@ -12,4 +12,10 @@ public interface IChannelService {
 	 * @return
 	 */
 	public String queryChannelInfo();
+
+	/**
+	 * 查询渠道类型 市场、运营、...
+	 * @return
+	 */
+	public String queryChannelType();
 }

@@ -13,6 +13,10 @@ public class ChannelController {
 	@Autowired
 	private IChannelService channelService;
 
+	/**
+	 * 获取渠道标题
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/columns" ,produces="text/html;charset=UTF-8")
 	public String columns() {
@@ -22,11 +26,28 @@ public class ChannelController {
 		return result;
 	}
 	
+	/**
+	 * 渠道明细信息
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/channel" ,produces="text/html;charset=UTF-8")	
 	public String channel() {
 		
 		String result = channelService.queryChannelInfo();
+		
+		return result;
+	}
+
+	/**
+	 * 获取渠道类型
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/type" ,produces="text/html;charset=UTF-8")	
+	public String type() {
+		
+		String result = channelService.queryChannelType();
 		
 		return result;
 	}
