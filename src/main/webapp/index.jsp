@@ -24,11 +24,12 @@
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 	
     <link rel="stylesheet" href="nav/styles.css">
-    <script src="nav/responsive-nav.js"></script>	
+    <script src="nav/responsive-nav.js"></script>
     
     <script type="text/javascript" src="js/echart_customer.js"></script>
     <script type="text/javascript" src="js/easyui_customer.js"></script>
 	<script type="text/javascript" src="js/easyui_date.js"></script>
+	<script type="text/javascript" src="js/export.js"></script>
 	
 </head>
 <body>
@@ -62,6 +63,7 @@
 						data-options="formatter:myformatter,parser:myparser" name="cus_end_date"></input>
 						
 					<input type="button" id="cus_query" value="查询"/>
+					<input type="button" id="cus_export" value="导出"/>
 				</div>
 				
 				<table id="t_register_grid" style="margin-top:20px;"></table>

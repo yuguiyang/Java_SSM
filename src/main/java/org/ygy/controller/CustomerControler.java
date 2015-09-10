@@ -31,4 +31,11 @@ public class CustomerControler {
 		
 		return result;
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/export" ,produces="text/html;charset=UTF-8")	
+	public String export(PageSearch pageSearch) {
+		
+		return "ok";
+	}
 }

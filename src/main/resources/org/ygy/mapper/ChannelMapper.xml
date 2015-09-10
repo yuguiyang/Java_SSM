@@ -116,7 +116,6 @@
 			tm_channel.channel_show_url,			
 			tm_cus.calendar_id
 		order by 
-			tm_cus.cust_register_num desc,
 			tm_cus.calendar_id desc
   	</select>
   	

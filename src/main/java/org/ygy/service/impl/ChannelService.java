@@ -65,6 +65,10 @@ public class ChannelService implements IChannelService {
 			pageSearch.setChannelId(each.getId());
 			
 			List<ChannelInfoVO> channelInfos = channelDao.selectChannelInfo(pageSearch); 
+			
+			if(each.getId() == "66") {
+				System.out.println("json->" + GsonUtil.toJson(channelInfos));
+			}
 
 			HashMap<String , Object> datas = new HashMap<String , Object>();
 			datas.put("channel_name", channelInfos.get(0).getShowName());

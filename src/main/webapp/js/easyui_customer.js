@@ -122,7 +122,7 @@ $(document).ready(function() {
     grid_channel = $('#dg_channel').datagrid({
     	title: '各渠道注册人数统计表',
         //url:'customer?act=channel',
-        method:'get',
+        method:'post',
         fitColumns: true,
         singleSelect: true,
         columns: [[]],
