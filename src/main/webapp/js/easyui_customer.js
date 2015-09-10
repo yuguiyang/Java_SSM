@@ -17,6 +17,46 @@ $(document).ready(function() {
 		
 	});
 	
+	//查询按钮 事件监听
+	$("#chl_query").click(function() {
+		
+		var channel_type=$("[name='chl_channel_type']").val();
+		var start_date=$("[name='chl_start_date']").val();
+		var end_date=$("[name='chl_end_date']").val();
+		
+		//获取参数 数据
+	    $('#dg_channel').datagrid('load', {
+	    	channelType: channel_type,
+	        startDate: start_date,
+	        endDate: end_date
+	    });	
+	    
+       	//动态加载Grid的列   
+        $.getJSON("channel/columns" , {
+        	channelType:channel_type,
+        	startDate:start_date,
+        	endDate:end_date
+        } , function(data) {  
+        	grid_channel.datagrid({ 
+                columns:[data] 
+            });//.datagrid("loadData", data);
+        	
+			//可以获取标题 信息 
+		    var columns = grid_channel.datagrid("options").columns;
+			
+			for(var index=2; index<columns[0].length; index++) {
+				var eachColumn = columns[0][index];
+				eachColumn.styler = function (value,row,index) {
+					if(value > 0) {
+						return 'background-color:#FFE1FF;';
+					}
+				}
+			}				
+        	
+        });	    
+		
+	});
+	
     
 	/*
 		2. EasyUI 注册人数表格
@@ -116,10 +156,22 @@ $(document).ready(function() {
     	 
     	//动态加载数据 
 			if(!local_load) {
-				$('#dg_channel').datagrid('load','channel/channel');
+				var channel_type=$("[name='chl_channel_type']").val();
+				var start_date=$("[name='chl_start_date']").val();
+				var end_date=$("[name='chl_end_date']").val();
+				
+				$('#dg_channel').datagrid('load','channel/channel',{
+	            	channelType:channel_type,
+	            	startDate:start_date,
+	            	endDate:end_date
+	            });
 				
 	           	//动态加载Grid的列   
-	            $.getJSON("channel/columns" , function(data) {  
+	            $.getJSON("channel/columns" , {
+	            	channelType:channel_type,
+	            	startDate:start_date,
+	            	endDate:end_date
+	            } , function(data) {  
 	            	grid_channel.datagrid({ 
 	                    columns:[data] 
 	                });//.datagrid("loadData", data);

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.ygy.entity.PageSearch;
 import org.ygy.service.IChannelService;
 
 @Controller
@@ -19,9 +20,9 @@ public class ChannelController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/columns" ,produces="text/html;charset=UTF-8")
-	public String columns() {
+	public String columns(PageSearch pageSearch) {
 		
-		String result = channelService.queryColumns();
+		String result = channelService.queryColumns(pageSearch);
 		
 		return result;
 	}
@@ -32,9 +33,9 @@ public class ChannelController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/channel" ,produces="text/html;charset=UTF-8")	
-	public String channel() {
+	public String channel(PageSearch pageSearch) {
 		
-		String result = channelService.queryChannelInfo();
+		String result = channelService.queryChannelInfo(pageSearch);
 		
 		return result;
 	}

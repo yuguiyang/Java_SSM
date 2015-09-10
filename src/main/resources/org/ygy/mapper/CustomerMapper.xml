@@ -20,10 +20,10 @@
 			from 
 				dm_cust_channel_analyse
 			<where>
-		        <if test="startDate != null">
+		        <if test="startDate != null and startDate != ''">
 		            and date(calendar_id) >= date(#{startDate}) 
 		        </if>
-		        <if test="endDate != null">
+		        <if test="endDate != null and endDate != ''">
     			<![CDATA[
 		            and date(calendar_id) < date(#{endDate})
 				]]>
@@ -45,10 +45,10 @@
 			from 
 				dm_cust_channel_analyse
 			<where>
-		        <if test="startDate != null">
+		        <if test="startDate != null and startDate != ''">
 		            and date(calendar_id) >= date(#{startDate}) 
 		        </if>
-		        <if test="endDate != null">
+		        <if test="endDate != null and endDate != ''">
     			<![CDATA[
 		         
 		            and date(calendar_id) < date(#{endDate})

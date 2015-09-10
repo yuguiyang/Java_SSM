@@ -26,7 +26,7 @@
 		<result column="cust_register_num_total" property="totalNum"/>				
 	</resultMap>
   
-  	<select id="selectChannels" resultMap="channelMapper">
+  	<select id="selectChannels" resultMap="channelMapper" parameterType="org.ygy.entity.PageSearch">
 		select 
 			tm_channel.channel_id,
 			tm_channel.channel_show_name,
@@ -37,33 +37,53 @@
 			dr_bi.dm_cust_channel_analyse tm_cus
 		on 
 			tm_cus.channel_id = tm_channel.channel_id
-		where 
-			tm_cus.calendar_id =  (select max(calendar_id) from dr_bi.dm_cust_channel_analyse)
-			
+		<where> 
+			tm_cus.calendar_id =  (
+				select max(calendar_id) from dr_bi.dm_cust_channel_analyse
+				<where>
+					<if	test="startDate != null and startDate != ''">
+						date(calendar_id) >= date(#{startDate})
+					</if>
+					<if test="endDate != null and endDate != ''">
+						<![CDATA[
+						and date(calendar_id) < date(#{endDate})
+						]]>
+					</if>			
+				</where>
+			)
+			<if test="channelType != null and channelType != ''">
+				and tm_channel.channel_type = #{channelType}
+			</if>
+		</where>	
 		order by 
 			tm_cus.cust_register_num desc,
 			tm_channel.channel_id desc 
   	</select>
   	
-  	<select id="selectColumns" resultMap="esColumnMapper">
-  	<![CDATA[
+  	<select id="selectColumns" resultMap="esColumnMapper" parameterType="org.ygy.entity.PageSearch">
 		select 
 			calendar_id field,
 			date_format(calendar_id,'%m月%d日') title
 		from 
 			dr_bi.dm_cust_channel_analyse
-		where 
-			calendar_id>=20150830 
+		<where>
+			<if	test="startDate != null and startDate != ''">
+				date(calendar_id) >= date(#{startDate})
+			</if>
+			<if test="endDate != null and endDate != ''">
+				<![CDATA[
+				and date(calendar_id) < date(#{endDate})
+				]]>
+			</if>
+		</where> 
 		group by 
 			calendar_id,
 			date_format(calendar_id,'%m月%d日')
 		order by 
 			calendar_id desc
-	]]> 
   	</select>
   	
-  	<select id="selectChannelInfo" resultMap="channelInfoMapper" parameterType="String">
-  	<![CDATA[
+  	<select id="selectChannelInfo" resultMap="channelInfoMapper" parameterType="org.ygy.entity.PageSearch">
 	  	select 
 			tm_channel.channel_id,
 			tm_channel.channel_show_name,
@@ -77,31 +97,39 @@
 			dr_bi.dm_cust_channel_analyse tm_cus
 		on 
 			tm_cus.channel_id = tm_channel.channel_id
-		where 
-			tm_channel.channel_id = #{channel_id}#
-		and 
-			tm_cus.calendar_id >= '20150830'
+		<where>
+			<if test="channelId != null">
+				tm_channel.channel_id = #{channelId}
+			</if>
+			<if test="startDate != null and startDate != ''">
+				and  date(tm_cus.calendar_id) >= date(#{startDate}) 
+			</if>
+			<if test="endDate != null and endDate != ''">
+			  	<![CDATA[
+				and  date(tm_cus.calendar_id) < date(#{endDate}) 
+				]]>
+			</if>			
+		</where>
 		group by 
 			tm_channel.channel_id,
 			tm_channel.channel_show_name,
 			tm_channel.channel_show_url,			
 			tm_cus.calendar_id
 		order by 
-			tm_cus.cust_register_num_total desc,
+			tm_cus.cust_register_num desc,
 			tm_cus.calendar_id desc
-	]]>
   	</select>
   	
   	
   	<select id="selectChannelType" resultMap="channelMapper">
 		select 
-			org_name channel_type
+			channel_type channel_type
 		from 
-			dr_bi.b_dim_channel
+			dr_bi.v_dim_channel
 		where 
-			org_name is not null
+			channel_type is not null
 		group by 
-			org_name
+			channel_type
   	</select>
     
 </mapper> 

@@ -3,6 +3,7 @@ package org.ygy.entity;
 public class PageSearch {
 	private Integer page;
 	private Integer rows;
+	private String channelId;
 	private String channelType;
 	private String startDate;
 	private String endDate;
@@ -21,6 +22,14 @@ public class PageSearch {
 
 	public void setRows(Integer rows) {
 		this.rows = rows;
+	}
+
+	public String getChannelId() {
+		return channelId;
+	}
+
+	public void setChannelId(String channelId) {
+		this.channelId = channelId;
 	}
 
 	public String getChannelType() {

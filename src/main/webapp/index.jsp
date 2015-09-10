@@ -61,31 +61,31 @@
 						class="easyui-datebox"
 						data-options="formatter:myformatter,parser:myparser" name="cus_end_date"></input>
 						
-					<input type="button" id="channel_type_query" value="查询"/>
+					<input type="button" id="cus_query" value="查询"/>
 				</div>
 				
 				<table id="t_register_grid" style="margin-top:20px;"></table>
 			</div>
 			
-			<div id="d_report_channel" style="display:none;" class="main">
+			<div id="d_report_channel" style="display:none;">
 			
 				<div id="div_channel_form" style="">
 					<span>部门：</span><input class="easyui-combobox"
 						name="chl_channel_type"
-						data-options="valueField:'type',textField:'type',url:'channel/type'">
+						data-options="valueField:'type',textField:'type',url:'channel/type'" style="width: 121px;">
 						
 					<span>开始时间：</span><input class="easyui-datebox"
 						data-options="formatter:myformatter,parser:myparser"
-						name="chl_start_date"></input> 
+						name="chl_start_date" style="width: 121px;"></input> 
 						
 					<span>结束时间：</span><input
 						class="easyui-datebox"
-						data-options="formatter:myformatter,parser:myparser" name="chl_end_date"></input>
+						data-options="formatter:myformatter,parser:myparser" name="chl_end_date" style="width: 121px;"></input>
 						
 					<input type="button" id="chl_query" value="查询"/>
 				</div>
 							
-				<table id="dg_channel" style="width: 1300px;height:800px;"></table>
+				<table id="dg_channel" style="width: 1300px;height:800px;" ></table>
 				
 			</div>
 			
