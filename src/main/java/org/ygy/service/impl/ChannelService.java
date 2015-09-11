@@ -96,4 +96,54 @@ public class ChannelService implements IChannelService {
 		
 		return GsonUtil.toJson(channelTypes);
 	}
+
+	@Override
+	public List<String> queryColumnsForExport(PageSearch pageSearch) {
+		if(pageSearch.getStartDate() == null || pageSearch.getStartDate() == "") {
+			pageSearch.setStartDate("2015-08-30");
+		}		
+		//标题
+		List<ESColumn> columns = packageColumns(channelDao.selectChannelColumns(pageSearch)); 
+		
+		List<String> headers = new ArrayList<String>();
+		for(ESColumn each : columns) {
+			headers.add(each.getTitle());
+		}
+		
+		return headers;
+	}
+
+	@Override
+	public List<ArrayList<String>> queryChannelInfoForExport(PageSearch pageSearch) {
+		if(pageSearch.getStartDate() == null || pageSearch.getStartDate() == "") {
+			pageSearch.setStartDate("2015-08-30");
+		}
+		
+		//开始遍历 从8月30号开始，左关联所有的数据
+		//所有的渠道
+		List<ChannelEntity> channels = channelDao.selectChannels(pageSearch); 
+		
+		List<ArrayList<String>> vos = new ArrayList<ArrayList<String>>();
+		
+		for(ChannelEntity each : channels) {
+			
+			pageSearch.setChannelId(each.getId());
+			
+			List<ChannelInfoVO> channelInfos = channelDao.selectChannelInfo(pageSearch); 
+			
+			ArrayList<String> datas = new ArrayList<String>();
+			
+			datas.add(channelInfos.get(0).getShowName());
+			datas.add(channelInfos.get(0).getShowURL());
+			datas.add(channelInfos.get(0).getTotalNum()+"");
+			
+			for(int index=0; index<channelInfos.size(); index++) {
+				datas.add(channelInfos.get(index).getRegisterNum()+"");
+			}
+			
+			vos.add(datas);
+		}		
+		
+		return vos;
+	}
 }

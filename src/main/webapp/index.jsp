@@ -85,6 +85,7 @@
 						data-options="formatter:myformatter,parser:myparser" name="chl_end_date" style="width: 121px;"></input>
 						
 					<input type="button" id="chl_query" value="查询"/>
+					<input type="button" id="chl_export" value="导出"/>
 				</div>
 							
 				<table id="dg_channel" style="width: 1300px;height:800px;" ></table>

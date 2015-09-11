@@ -1,10 +1,6 @@
 package org.ygy.controller;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.ygy.entity.PageSearch;
 import org.ygy.property.BIConstants;
 import org.ygy.service.ICustomerService;
+import org.ygy.util.Downloadutil;
 import org.ygy.util.POIUtil;
 import org.ygy.vo.RegisterVO;
 
@@ -60,7 +57,7 @@ public class CustomerControler {
 	@ResponseBody
 	@RequestMapping(value = "/export")
 	public ModelAndView  export(PageSearch pageSearch,HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(pageSearch);
+
 		//1. 生成文件
 		pageSearch.setAct(false);
 		List<String> headers = new ArrayList<String>();
@@ -72,32 +69,12 @@ public class CustomerControler {
 		
 		String ctxPath = request.getSession().getServletContext().getRealPath("/download");
 		
-		String filePath = ctxPath + File.separator + BIConstants.EXCEL_NAME;
-		
-		System.out.println(filePath);
+		String filePath = ctxPath + File.separator + BIConstants.REPORT_CUS;
 		
 		POIUtil.export(filePath, BIConstants.SHEET_NAME, headers, datas);
 		
 		///2. 下载
-		BufferedInputStream bis = null;
-		BufferedOutputStream bos = null;
-		
-		long fileLength = new File(filePath).length();
-
-		response.setContentType("application/octet-stream");
-		response.setHeader("Content-disposition", "attachment; filename="
-				+ new String(BIConstants.EXCEL_NAME.getBytes("utf-8"), "ISO8859-1"));
-		response.setHeader("Content-Length", String.valueOf(fileLength));
-
-		bis = new BufferedInputStream(new FileInputStream(filePath));
-		bos = new BufferedOutputStream(response.getOutputStream());
-		byte[] buff = new byte[2048];
-		int bytesRead;
-		while (-1 != (bytesRead = bis.read(buff, 0, buff.length))) {
-			bos.write(buff, 0, bytesRead);
-		}
-		bis.close();
-		bos.close();	
+		Downloadutil.download(filePath, BIConstants.REPORT_CUS, response);
 
 		return null;
 	}
