@@ -59,7 +59,9 @@
 				calendar_id
 			order by 
 				calendar_id desc
-			limit #{page},#{rows}
+			<if test="act">
+				limit #{page},#{rows}
+			</if>
     </select>
     
     <select id="selectRegisterChart" resultMap="registerMapper">

@@ -21,7 +21,9 @@ public class CustomerDao extends SqlSessionDaoSupport  implements ICustomerDao {
 	@Override
 	public List<RegisterVO> selectRegisters(PageSearch pageSearch) {
 		
-		pageSearch.setPage(pageSearch.getRows()*(pageSearch.getPage()-1));
+		if(pageSearch.isAct()) {
+			pageSearch.setPage(pageSearch.getRows()*(pageSearch.getPage()-1));
+		}
 		
 		List<RegisterVO> registerList = getSqlSession().selectList(Mappers.CUSTOMER + "selectRegister",pageSearch);
 		

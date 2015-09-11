@@ -1,6 +1,9 @@
 package org.ygy.service;
 
+import java.util.List;
+
 import org.ygy.entity.PageSearch;
+import org.ygy.vo.RegisterVO;
 
 public interface ICustomerService {
 	
@@ -17,4 +20,11 @@ public interface ICustomerService {
 	 * @return
 	 */
 	public String queryRegisterChart();
+	
+	/**
+	 * 查询要导出的客户信息
+	 * @param pageSearch
+	 * @return
+	 */
+	public List<RegisterVO> queryRegisterForExport(PageSearch pageSearch);
 }

@@ -63,5 +63,13 @@ public class CustomerService implements ICustomerService {
 		return GsonUtil.toJson(echart);
 	}
 
+	@Override
+	public List<RegisterVO> queryRegisterForExport(PageSearch pageSearch) {
+		
+		List<RegisterVO> registerList = customerDao.selectRegisters(pageSearch);
+		
+		return registerList;
+	}
+
 
 }

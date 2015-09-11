@@ -30,7 +30,6 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.formula.functions.T;
-import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -38,13 +37,53 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class TestPOI {
 	
-	public static void createRow(Sheet sheet , List<String> titles) {
-		 Row row = sheet.createRow(0);
-		 
-		 for(int index=0; index<titles.size(); index++) {
-			row.createCell(index).setCellValue(titles.get(index));
-		 }
+	public static void createRow(Sheet sheet , List<String> headers) {
+		Row row = sheet.createRow(0);
+		
+		//2. 遍历标题
+		for (int index = 0; index < headers.size(); index++) {
+			row.createCell(index).setCellValue(headers.get(index));
+		}		
 	}
+	
+	public static void createExcel(String excelName , String sheetName, List<String> headers )throws Exception {
+		Workbook wb = new XSSFWorkbook();
+		FileOutputStream fileOut = new FileOutputStream(excelName);
+
+//		CreationHelper createHelper = wb.getCreationHelper();
+
+		// 1. 生成Sheet
+		Sheet sheet = wb.createSheet(sheetName);
+
+		createRow(sheet , headers);
+
+		wb.write(fileOut);
+		fileOut.close();
+		wb.close();
+	}
+	
+	public static void main(String[] args) throws Exception {
+
+	    List<String> titles = new ArrayList<String>();
+	    titles.add("aa");
+	    titles.add("bb");
+	    titles.add("cc");
+	    
+	    createExcel("BI报表.xlsx" , "全站注册信息统计表",titles);
+	   /* 
+	    //2. 新增行
+	    Row row = sheet.createRow((short)0);
+	    
+	    //3. 新增单元格
+	    Cell cell = row.createCell(0);
+	    cell.setCellValue("hello world");
+
+	    row.createCell(1).setCellValue(1.2);
+	    row.createCell(2).setCellValue( createHelper.createRichTextString("This is a string"));
+	    row.createCell(3).setCellValue(true);
+	    */
+	    
+	}	
 	
     public void exportExcel(String title, String[] headers, Collection<T> dataset, String fileName, String type) {  
         try {  
@@ -56,7 +95,9 @@ public class TestPOI {
             // TODO Auto-generated catch block  
             e.printStackTrace();  
         }  
-    }  
+    } 
+    
+    
   
     // public void exportExcel(String[] headers, Collection<T> dataset,  
     // OutputStream out, String pattern) {  
@@ -267,38 +308,7 @@ public class TestPOI {
         }  
   
     }	
-	public static void main(String[] args) throws Exception {
-	    Workbook wb = new XSSFWorkbook();
-	    FileOutputStream fileOut = new FileOutputStream("BI报表.xlsx");
-	    
-	    CreationHelper createHelper = wb.getCreationHelper();
 
-	    //1. 生成Sheet
-	    Sheet sheet = wb.createSheet("全站注册信息统计表");
-	    
-	    List<String> titles = new ArrayList<String>();
-	    titles.add("aa");
-	    titles.add("bb");
-	    titles.add("cc");
-	    
-	    createRow(sheet,titles);
-	   /* 
-	    //2. 新增行
-	    Row row = sheet.createRow((short)0);
-	    
-	    //3. 新增单元格
-	    Cell cell = row.createCell(0);
-	    cell.setCellValue("hello world");
-
-	    row.createCell(1).setCellValue(1.2);
-	    row.createCell(2).setCellValue( createHelper.createRichTextString("This is a string"));
-	    row.createCell(3).setCellValue(true);
-	    */
-	    
-	    wb.write(fileOut);
-	    fileOut.close();
-	    wb.close();
-	}
 	
 	
 }

@@ -7,6 +7,7 @@ public class PageSearch {
 	private String channelType;
 	private String startDate;
 	private String endDate;
+	private boolean act = true;
 
 	public Integer getPage() {
 		return page;
@@ -54,6 +55,15 @@ public class PageSearch {
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+	
+
+	public boolean isAct() {
+		return act;
+	}
+
+	public void setAct(boolean act) {
+		this.act = act;
 	}
 
 	@Override
