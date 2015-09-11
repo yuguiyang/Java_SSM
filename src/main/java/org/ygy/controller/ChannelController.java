@@ -69,7 +69,7 @@ public class ChannelController {
 	public ModelAndView export(PageSearch pageSearch,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		request.setCharacterEncoding("UTF-8");
-		System.out.println("pageSearch->" + pageSearch);
+		
 		//1. 生成文件
 		List<String> headers = channelService.queryColumnsForExport(pageSearch);
 		
@@ -79,7 +79,7 @@ public class ChannelController {
 		
 		List<ArrayList<String>> datas = channelService.queryChannelInfoForExport(pageSearch);
 		
-		POIUtil.export2(filePath, BIConstants.SHEET_NAME, headers, datas);
+		POIUtil.export(filePath, BIConstants.SHEET_NAME, headers, datas);
 		
 		///2. 下载
 		Downloadutil.download(filePath, BIConstants.REPORT_CHL, response);

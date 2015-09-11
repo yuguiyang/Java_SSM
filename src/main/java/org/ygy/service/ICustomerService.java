@@ -1,9 +1,9 @@
 package org.ygy.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ygy.entity.PageSearch;
-import org.ygy.vo.RegisterVO;
 
 public interface ICustomerService {
 	
@@ -26,5 +26,5 @@ public interface ICustomerService {
 	 * @param pageSearch
 	 * @return
 	 */
-	public List<RegisterVO> queryRegisterForExport(PageSearch pageSearch);
+	public List<ArrayList<String>> queryRegisterForExport(PageSearch pageSearch);
 }

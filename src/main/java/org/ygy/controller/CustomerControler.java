@@ -65,7 +65,7 @@ public class CustomerControler {
 		headers.add("新增注册人数");
 		headers.add("总注册人数");
 
-		List<RegisterVO> datas = customerService.queryRegisterForExport(pageSearch);
+		List<ArrayList<String>> datas = customerService.queryRegisterForExport(pageSearch);
 		
 		String ctxPath = request.getSession().getServletContext().getRealPath("/download");
 		

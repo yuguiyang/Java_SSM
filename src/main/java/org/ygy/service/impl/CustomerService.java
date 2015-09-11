@@ -64,11 +64,22 @@ public class CustomerService implements ICustomerService {
 	}
 
 	@Override
-	public List<RegisterVO> queryRegisterForExport(PageSearch pageSearch) {
+	public List<ArrayList<String>> queryRegisterForExport(PageSearch pageSearch) {
 		
 		List<RegisterVO> registerList = customerDao.selectRegisters(pageSearch);
 		
-		return registerList;
+		List<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();
+		
+		for(RegisterVO each : registerList) {
+			ArrayList<String> data = new ArrayList<String>();
+			data.add(each.getCalendarId());
+			data.add(each.getTodayAddNum()+"");
+			data.add(each.getTotalNum()+"");
+			
+			datas.add(data);
+		}
+		
+		return datas;
 	}
 
 
