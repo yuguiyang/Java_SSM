@@ -17,7 +17,6 @@ import org.ygy.property.BIConstants;
 import org.ygy.service.ICustomerService;
 import org.ygy.util.Downloadutil;
 import org.ygy.util.POIUtil;
-import org.ygy.vo.RegisterVO;
 
 @Controller
 @RequestMapping("/customer")

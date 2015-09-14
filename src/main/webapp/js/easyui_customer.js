@@ -123,7 +123,7 @@ $(document).ready(function() {
     	title: '各渠道注册人数统计表',
         //url:'customer?act=channel',
         method:'post',
-        fitColumns: true,
+        //fitColumns: true,
         singleSelect: true,
         columns: [[]],
         striped: true

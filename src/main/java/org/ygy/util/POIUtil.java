@@ -53,7 +53,7 @@ public class POIUtil {
 			Row eachRow = sheet.createRow(index+1);
 			
 			for(int j=0; j<datas.get(index).size(); j++) {
-				Cell cell = eachRow.createCell(0);
+				Cell cell = eachRow.createCell(j);
 				cell.setCellStyle(style); 
 				cell.setCellValue(datas.get(index).get(j));			
 			}
