@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.ygy.dao.ICustomerDao;
 import org.ygy.entity.PageSearch;
+import org.ygy.entity.echarts.MapData;
 import org.ygy.property.Mappers;
 import org.ygy.vo.RegisterVO;
 
@@ -36,6 +37,14 @@ public class CustomerDao extends SqlSessionDaoSupport  implements ICustomerDao {
 		List<RegisterVO> registerList = getSqlSession().selectList(Mappers.CUSTOMER + "selectRegisterChart");
 		
 		return registerList;
+	}
+
+	@Override
+	public List<MapData> selectRegisterMap() {
+		
+		List<MapData> datas = getSqlSession().selectList(Mappers.CUSTOMER + "selectRegisterMap");
+		
+		return datas;
 	}
 
 }

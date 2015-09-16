@@ -3,6 +3,7 @@ package org.ygy.dao;
 import java.util.List;
 
 import org.ygy.entity.PageSearch;
+import org.ygy.entity.echarts.MapData;
 import org.ygy.vo.RegisterVO;
 
 public interface ICustomerDao {
@@ -28,5 +29,7 @@ public interface ICustomerDao {
 	 * @return
 	 */
 	public List<RegisterVO> selectRegisterChart();
+
+	public List<MapData> selectRegisterMap();
 
 }

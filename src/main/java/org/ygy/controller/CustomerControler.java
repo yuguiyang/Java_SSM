@@ -78,4 +78,17 @@ public class CustomerControler {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/map", produces = "text/html;charset=UTF-8")	
+	public String map() {
+		
+		String result = customerService.queryRegisterMap();
+		
+		return result;
+	}
+	
 }

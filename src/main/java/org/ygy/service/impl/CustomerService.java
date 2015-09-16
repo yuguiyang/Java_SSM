@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.ygy.dao.ICustomerDao;
 import org.ygy.entity.PageSearch;
+import org.ygy.entity.echarts.BaseSerie;
+import org.ygy.entity.echarts.DataRange;
 import org.ygy.entity.echarts.Echart;
+import org.ygy.entity.echarts.MapData;
+import org.ygy.entity.echarts.MapSerie;
 import org.ygy.entity.echarts.Serie;
 import org.ygy.service.ICustomerService;
 import org.ygy.util.GsonUtil;
@@ -54,8 +58,8 @@ public class CustomerService implements ICustomerService {
 		echart.setxAxis("category", names);
 		echart.setyAxis("value");
 		
-		Serie<Integer> serie = new Serie<Integer>("每日新增客户数" , "line",datas);
-		List<Serie<Integer>> series = new ArrayList<Serie<Integer>>();
+		BaseSerie serie = new Serie<Integer>("每日新增客户数" , "line",datas);
+		List<BaseSerie> series = new ArrayList<BaseSerie>();
 		series.add(serie);
 		
 		echart.setSeries(series);
@@ -80,6 +84,26 @@ public class CustomerService implements ICustomerService {
 		}
 		
 		return datas;
+	}
+
+	@Override
+	public String queryRegisterMap() {
+		Echart<Integer> echart = new Echart<Integer>();
+		echart.setTitle("注册人数区域分布");
+		echart.setTooltip(true , "item");
+		echart.setLegend(new String[]{"注册用户数"});
+		echart.setDataRange(new DataRange());
+		
+		List<MapData> datas = customerDao.selectRegisterMap();
+		
+		BaseSerie serie = new MapSerie("注册用户数" , datas);
+		
+		List<BaseSerie> series = new ArrayList<BaseSerie>();
+		series.add(serie);
+		
+		echart.setSeries(series);
+		
+		return GsonUtil.toJson(echart);
 	}
 
 

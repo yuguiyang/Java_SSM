@@ -12,9 +12,6 @@
     
 	<!-- ECHARTS -->
 	<script type="text/javascript" src="echarts/echarts.js"></script>
-    <script type="text/javascript">
-        
-    </script>
     
     <!-- EASY UI -->
 	<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">

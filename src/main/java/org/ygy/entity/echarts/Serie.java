@@ -1,6 +1,6 @@
 package org.ygy.entity.echarts;
 
-public class Serie<T> implements java.io.Serializable {
+public class Serie<T> extends BaseSerie implements java.io.Serializable {
 
 	private static final long serialVersionUID = 2579979034796743165L;
 	

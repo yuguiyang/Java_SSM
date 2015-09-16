@@ -18,8 +18,10 @@ public class Echart<T> implements Serializable {
 	private XAxis xAxis;  
     
     private YAxis yAxis;  
+    
+    private DataRange dataRange;
   
-    private List<Serie<T>> series;
+    private List<BaseSerie> series;
 
 	public Title getTitle() {
 		return title;
@@ -89,12 +91,20 @@ public class Echart<T> implements Serializable {
 		this.yAxis = new YAxis(type);
 	}
 
-	public List<Serie<T>> getSeries() {
+	public List<BaseSerie> getSeries() {
 		return series;
 	}
 
-	public void setSeries(List<Serie<T>> series) {
+	public void setSeries(List<BaseSerie> series) {
 		this.series = series;
 	}
-    
+
+	public DataRange getDataRange() {
+		return dataRange;
+	}
+
+	public void setDataRange(DataRange dataRange) {
+		this.dataRange = dataRange;
+	}
+	
 }

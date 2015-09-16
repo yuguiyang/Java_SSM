@@ -10,6 +10,11 @@
 		<result column="cust_register_num" property="todayAddNum"/>
 		<result column="cust_register_num_total" property="totalNum"/>
 	</resultMap>
+	
+	<resultMap type="org.ygy.entity.echarts.MapData" id="mapDataMapper">
+		<result column="province" property="name"></result>
+		<result column="num" property="value"/>
+	</resultMap>
 
     <select id="selectRegisterPage" parameterType="org.ygy.entity.PageSearch" resultType="int">
     	select count(1) from (
@@ -79,5 +84,10 @@
 		order by 
 			calendar_id asc
 	 ]]> 
+    </select>
+    
+    
+    <select id="selectRegisterMap" resultMap="mapDataMapper">
+		select province , num from tmp_map_ip    
     </select>
 </mapper> 

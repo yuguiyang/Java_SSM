@@ -27,4 +27,10 @@ public interface ICustomerService {
 	 * @return
 	 */
 	public List<ArrayList<String>> queryRegisterForExport(PageSearch pageSearch);
+
+	/**
+	 * 查询注册人数底图统计
+	 * @return
+	 */
+	public String queryRegisterMap();
 }
