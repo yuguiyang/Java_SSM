@@ -3,7 +3,7 @@ package org.ygy.entity.echarts;
 public class DataRange {
 
 	private int min = 0;
-	private int max = 100;
+	private int max = 20;
 	private String x = "left";
 	private String y = "bottom";
 	private String[] text = new String[] { "高", "低" };

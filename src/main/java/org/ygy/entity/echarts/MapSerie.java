@@ -2,17 +2,19 @@ package org.ygy.entity.echarts;
 
 import java.util.List;
 
-public class MapSerie extends BaseSerie{
+public class MapSerie extends BaseSerie {
 
 	private String name;
 	private String type = "map";
 	private String mapType = "china";
 	private boolean roam = false;
+	private ItemStyle itemStyle;
 	private List<MapData> data;
-	
-	public MapSerie() {}
-	
-	public MapSerie(String name , List<MapData> data) {
+
+	public MapSerie() {
+	}
+
+	public MapSerie(String name, List<MapData> data) {
 		this.name = name;
 		this.data = data;
 	}
@@ -47,6 +49,14 @@ public class MapSerie extends BaseSerie{
 
 	public void setRoam(boolean roam) {
 		this.roam = roam;
+	}
+
+	public ItemStyle getItemStyle() {
+		return itemStyle;
+	}
+
+	public void setItemStyle(ItemStyle itemStyle) {
+		this.itemStyle = itemStyle;
 	}
 
 	public List<MapData> getData() {

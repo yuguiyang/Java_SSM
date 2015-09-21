@@ -10,6 +10,7 @@ import org.ygy.entity.PageSearch;
 import org.ygy.entity.echarts.BaseSerie;
 import org.ygy.entity.echarts.DataRange;
 import org.ygy.entity.echarts.Echart;
+import org.ygy.entity.echarts.ItemStyle;
 import org.ygy.entity.echarts.MapData;
 import org.ygy.entity.echarts.MapSerie;
 import org.ygy.entity.echarts.Serie;
@@ -96,7 +97,8 @@ public class CustomerService implements ICustomerService {
 		
 		List<MapData> datas = customerDao.selectRegisterMap();
 		
-		BaseSerie serie = new MapSerie("注册用户数" , datas);
+		MapSerie serie = new MapSerie("注册用户数" , datas);
+		serie.setItemStyle(new ItemStyle());
 		
 		List<BaseSerie> series = new ArrayList<BaseSerie>();
 		series.add(serie);
