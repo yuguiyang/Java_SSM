@@ -48,4 +48,10 @@ public interface IChannelService {
 	 * @return
 	 */
 	public String queryOutlineData();
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String queryOutlineDetail(String item);
 }

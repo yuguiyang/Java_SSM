@@ -35,6 +35,11 @@
 		<result column="invest_num" property="investNum"/>
 		<result column="invest_money" property="investMoney"/>			
 	</resultMap>
+	
+	<resultMap type="org.ygy.vo.OutlineDetail" id="outlineDetail">
+		<result column="calendar_id" property="calendarId"/>
+		<result column="cust_num" property="custNum"/>		
+	</resultMap>	
   
   	<select id="selectChannels" resultMap="channelMapper" parameterType="org.ygy.entity.PageSearch">
 		select 
@@ -161,5 +166,45 @@
 			tm_cust.calendar_id=date_format(adddate(now(),interval -1 day),'%Y%m%d')
 		order by cust_register_num_total desc  	
   	</select>
+  	
+  	<select id="selectOutlineDetailRegister" resultMap="outlineDetail">
+		select 
+			date(calendar_id) calendar_id, 
+			sum(cust_register_num) cust_num
+		from 
+			dr_bi.dm_cust_channel_analyse
+		group by date(calendar_id) 
+		order by calendar_id	
+  	</select>
+  	
+  	<select id="selectOutlineDetailReal" resultMap="outlineDetail">
+		select 
+			date(calendar_id) calendar_id, 
+			sum(cust_real_num) cust_num
+		from 
+			dr_bi.dm_cust_channel_analyse
+		group by date(calendar_id) 
+		order by calendar_id	
+  	</select>
+  	
+  	<select id="selectOutlineDetailInvest" resultMap="outlineDetail">
+		select 
+			date(calendar_id) calendar_id, 
+			sum(cust_deal_num) cust_num
+		from 
+			dr_bi.dm_cust_channel_analyse
+		group by date(calendar_id) 
+		order by calendar_id	
+  	</select>
+  	
+  	<select id="selectOutlineDetailMoney" resultMap="outlineDetail">
+		select 
+			date(calendar_id) calendar_id, 
+			sum(deal_amount) cust_num
+		from 
+			dr_bi.dm_cust_channel_analyse
+		group by date(calendar_id) 
+		order by calendar_id	
+  	</select>  	  	  	
     
 </mapper> 

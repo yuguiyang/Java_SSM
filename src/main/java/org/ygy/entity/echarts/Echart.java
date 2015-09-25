@@ -3,13 +3,15 @@ package org.ygy.entity.echarts;
 import java.io.Serializable;
 import java.util.List;
 
-public class Echart<T> implements Serializable {
+public class Echart implements Serializable {
 	
 	private static final long serialVersionUID = -5008104692637786764L;
 	
 	private Title title;
 	
 	private Tooltip tooltip;
+	
+	private DataZoom dataZoom;
 	
 	private Legend legend;
 	
@@ -37,6 +39,18 @@ public class Echart<T> implements Serializable {
 
 	public Tooltip getTooltip() {
 		return tooltip;
+	}
+
+	public DataZoom getDataZoom() {
+		return dataZoom;
+	}
+
+	public void setDataZoom(DataZoom dataZoom) {
+		this.dataZoom = dataZoom;
+	}
+	
+	public void setDataZoom(int start) {
+		this.dataZoom = new DataZoom(start);
 	}
 
 	public void setTooltip(Tooltip tooltip) {

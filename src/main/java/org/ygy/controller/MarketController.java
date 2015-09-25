@@ -31,6 +31,15 @@ public class MarketController {
 		
 		String result = channelService.queryOutlineData();
 		
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/outline/detail" ,produces="text/html;charset=UTF-8")
+	public String outlineDetail(String item) {
+		
+		String result = channelService.queryOutlineDetail(item);
+		
 		return result;		
-	}	
+	}
 }

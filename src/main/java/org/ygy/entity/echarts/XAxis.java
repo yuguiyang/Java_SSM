@@ -6,6 +6,8 @@ public class XAxis implements java.io.Serializable{
 
 	private String type;
 	
+	private boolean boundaryGap = false;
+	
 	private String[] data;
 	
 	public XAxis() {}
@@ -23,6 +25,15 @@ public class XAxis implements java.io.Serializable{
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	
+	public boolean isBoundaryGap() {
+		return boundaryGap;
+	}
+
+	public void setBoundaryGap(boolean boundaryGap) {
+		this.boundaryGap = boundaryGap;
 	}
 
 	public String[] getData() {

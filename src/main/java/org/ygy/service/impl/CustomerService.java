@@ -52,7 +52,7 @@ public class CustomerService implements ICustomerService {
 		}
 		
 		
-		Echart<Integer> echart = new Echart<Integer>();
+		Echart echart = new Echart();
 		echart.setTitle("每日新增客户数趋势图");
 		echart.setTooltip(true , "axis");
 		echart.setLegend(new String[]{"每日新增客户数"});
@@ -89,7 +89,7 @@ public class CustomerService implements ICustomerService {
 
 	@Override
 	public String queryRegisterMap() {
-		Echart<Integer> echart = new Echart<Integer>();
+		Echart echart = new Echart();
 		echart.setTitle("注册人数区域分布");
 		echart.setTooltip(true , "item");
 		echart.setLegend(new String[]{"注册用户数"});

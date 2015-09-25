@@ -19,19 +19,26 @@
 	<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
 	
-	<style type="text/css">
-		body {
-			min-height: 2000px;
-			padding-top: 70px;
-		}
-    	.datagrid-header-row td{
-    		background-color:#373C64;
-    		color:#FFFFFF;
-    		font-weight:bold;
-    	}
-	</style>	
+<style type="text/css">
+body {
+	min-height: 2000px;
+	padding-top: 70px;
+}
+.datagrid-header-row td{
+	background-color:#373C64;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
+.datagrid-header td.datagrid-header-over{
+	background-color:#373C64;
+	color:#FFFFFF;
+	font-weight:bold;
+}    	
+</style>	
 	    
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="echarts/echarts.js"></script>
 	<script type="text/javascript" src="js/es_market_outline.js"></script>
 </head>
 <body>
@@ -73,18 +80,29 @@
 					</div>
 					
 				</div>
-			</div>
+				
 				<table id="es_market_outline" style="margin-top:20px;font-family:microsoft yahei;"></table>
-			
-			<div class="row-fluid">
-				<div class="span12">
-					<div class="page-header">
-						<h1>
-							注册人数分析部 <small>市场部</small>
-						</h1>
-					</div>
-				</div>
-			</div>			
+				
+			</div>
+
+				<div id="es_market_detail" class="easyui-tabs" style="width:1170px;height:800px;padding-top:20px;padding-bottom:20px;">
+				    <div title="注册人数" style="padding:20px;">
+						<div id="ec_market_detail_register" style="width: 1000px; height: 400px;"></div>
+				    </div>
+				    
+				    <div title="实名人数" style="padding:20px;">
+						<div id="ec_market_detail_real" style="width: 1000px; height: 400px;"></div>
+				    </div>
+				    
+				    <div title="投资人数"  style="padding:20px;">
+						<div id="ec_market_detail_invest" style="width: 1000px; height: 400px;"></div>
+				    </div>
+				    
+			        <div title="投资金额"  style="padding:20px;">
+			            <div id="ec_market_detail_money" style="width: 1000px; height: 400px;"></div>
+			        </div>	
+			        	    
+				</div>				
 		</div>
 
 	</div> <!-- /container -->

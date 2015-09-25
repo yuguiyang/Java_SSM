@@ -10,11 +10,15 @@ import org.ygy.dao.IChannelDao;
 import org.ygy.entity.ChannelEntity;
 import org.ygy.entity.PageSearch;
 import org.ygy.entity.easyui.ESColumn;
+import org.ygy.entity.echarts.BaseSerie;
+import org.ygy.entity.echarts.Echart;
+import org.ygy.entity.echarts.Serie;
 import org.ygy.service.IChannelService;
 import org.ygy.util.GsonUtil;
 import org.ygy.vo.ChannelInfoVO;
 import org.ygy.vo.ESBaseVO;
 import org.ygy.vo.OutlineData;
+import org.ygy.vo.OutlineDetail;
 
 @Service("channelService")
 public class ChannelService implements IChannelService {
@@ -180,5 +184,49 @@ public class ChannelService implements IChannelService {
 		base.setRows(datas);
 
 		return GsonUtil.toJson(base);
+	}
+
+	@Override
+	public String queryOutlineDetail(String item) {
+		String baseName = "";
+		List<OutlineDetail> details = null;
+		
+		if("register".equals(item)) {
+			baseName = "注册人数";
+			details = channelDao.selectOutlineDetailRegister();
+		} else if("real".equals(item)) {
+			baseName = "实名人数";
+			details = channelDao.selectOutlineDetailReal();
+		} else if("invest".equals(item)) {
+			baseName = "投资人数";
+			details = channelDao.selectOutlineDetailInvest();
+		} else if("money".equals(item)) {
+			baseName = "投资金额";
+			details = channelDao.selectOutlineDetailMoney();
+		}
+		
+		String[] names = new String[details.size()];
+		Integer[] datas = new Integer[details.size()];
+		for(int index=0; index<details.size();  index++) {
+			names[index] = details.get(index).getCalendarId();
+			datas[index] = details.get(index).getCustNum();
+		}
+		
+		
+		//公共初始化
+		Echart echart = new Echart();
+		echart.setTooltip(true , "axis");
+		echart.setDataZoom(70);
+		echart.setLegend(new String[]{baseName});
+		echart.setxAxis("category", names);
+		echart.setyAxis("value");
+		
+		BaseSerie serie = new Serie<Integer>(baseName , "line",datas);
+		List<BaseSerie> series = new ArrayList<BaseSerie>();
+		series.add(serie);
+		
+		echart.setSeries(series);
+		
+		return GsonUtil.toJson(echart);
 	}
 }

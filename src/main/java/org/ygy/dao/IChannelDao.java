@@ -7,6 +7,7 @@ import org.ygy.entity.PageSearch;
 import org.ygy.entity.easyui.ESColumn;
 import org.ygy.vo.ChannelInfoVO;
 import org.ygy.vo.OutlineData;
+import org.ygy.vo.OutlineDetail;
 
 public interface IChannelDao {
 
@@ -40,5 +41,14 @@ public interface IChannelDao {
 
 	
 	public List<OutlineData> selectOutlineData();
+
+	public List<OutlineDetail> selectOutlineDetailRegister();
+
+	public List<OutlineDetail> selectOutlineDetailReal();
+
+	public List<OutlineDetail> selectOutlineDetailInvest();
+
+	public List<OutlineDetail> selectOutlineDetailMoney();
+	
 
 }

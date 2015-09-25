@@ -53,4 +53,58 @@ $(document).ready(function() {
 	        	$(this).datagrid('freezeRow',0);
 	    	}		        
 	    });
+	   
+	   
+	    $('#es_market_detail').tabs({
+	    	border:false,
+	        onSelect:function(title){
+//	    		alert(title+' is selected');
+	        }
+	    });
+	    
+	    
+	require.config({
+	    paths: {
+	        echarts: 'echarts'
+	    }
+	});
+	
+	require(
+	    [
+	        'echarts',
+	        'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
+	    ],
+	    function (ec) {
+	        // 1
+	        var ec_register = ec.init(document.getElementById('ec_market_detail_register')); 
+	        
+	        $.getJSON("market/outline/detail" , {item:'register'} , function(data) {  
+	        	ec_register.setOption(data); 
+	        }); 
+	        
+	        
+	        //2
+	        var ec_real = ec.init(document.getElementById('ec_market_detail_real')); 
+
+	        $.getJSON("market/outline/detail" , {item:'real'} , function(data) {  
+	        	ec_real.setOption(data); 
+	        });  
+	        
+	        
+	        //3
+	        var ec_invest = ec.init(document.getElementById('ec_market_detail_invest')); 
+	        
+	        $.getJSON("market/outline/detail" , {item:'invest'} , function(data) {
+	        	ec_invest.setOption(data); 
+	        });
+	        
+	        //4
+	        var ec_money = ec.init(document.getElementById('ec_market_detail_money')); 
+	        
+	        $.getJSON("market/outline/detail" , {item:'money'} , function(data) {
+	        	ec_money.setOption(data); 
+	        });	        
+	
+	    }
+	);	    
 });
