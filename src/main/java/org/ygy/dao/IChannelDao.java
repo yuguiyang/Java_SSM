@@ -6,6 +6,7 @@ import org.ygy.entity.ChannelEntity;
 import org.ygy.entity.PageSearch;
 import org.ygy.entity.easyui.ESColumn;
 import org.ygy.vo.ChannelInfoVO;
+import org.ygy.vo.OutlineData;
 
 public interface IChannelDao {
 
@@ -36,5 +37,8 @@ public interface IChannelDao {
 	 * @return
 	 */
 	public List<ChannelEntity> selectChannelTypes();
+
+	
+	public List<OutlineData> selectOutlineData();
 
 }

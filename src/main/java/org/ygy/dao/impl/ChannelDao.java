@@ -9,6 +9,7 @@ import org.ygy.entity.PageSearch;
 import org.ygy.entity.easyui.ESColumn;
 import org.ygy.property.Mappers;
 import org.ygy.vo.ChannelInfoVO;
+import org.ygy.vo.OutlineData;
 
 public class ChannelDao extends SqlSessionDaoSupport  implements IChannelDao {
 
@@ -42,6 +43,14 @@ public class ChannelDao extends SqlSessionDaoSupport  implements IChannelDao {
 		List<ChannelEntity> channels = getSqlSession().selectList(Mappers.CHANNEL + "selectChannelType");
 		
 		return channels;
+	}
+
+	@Override
+	public List<OutlineData> selectOutlineData() {
+		
+		List<OutlineData> datas = getSqlSession().selectList(Mappers.CHANNEL + "selectOutlineData");
+		
+		return datas;
 	}  
 	
 	

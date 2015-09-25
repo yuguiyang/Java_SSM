@@ -12,8 +12,9 @@ import org.ygy.entity.PageSearch;
 import org.ygy.entity.easyui.ESColumn;
 import org.ygy.service.IChannelService;
 import org.ygy.util.GsonUtil;
-import org.ygy.vo.BaseVO;
 import org.ygy.vo.ChannelInfoVO;
+import org.ygy.vo.ESBaseVO;
+import org.ygy.vo.OutlineData;
 
 @Service("channelService")
 public class ChannelService implements IChannelService {
@@ -66,10 +67,6 @@ public class ChannelService implements IChannelService {
 			
 			List<ChannelInfoVO> channelInfos = channelDao.selectChannelInfo(pageSearch); 
 			
-			if(each.getId() == "66") {
-				System.out.println("json->" + GsonUtil.toJson(channelInfos));
-			}
-
 			HashMap<String , Object> datas = new HashMap<String , Object>();
 			datas.put("channel_name", channelInfos.get(0).getShowName());
 			datas.put("channel_url", channelInfos.get(0).getShowURL());
@@ -82,7 +79,7 @@ public class ChannelService implements IChannelService {
 			vos.add(datas);
 		}
 		
-		BaseVO<HashMap<String,Object>> base = new BaseVO<HashMap<String,Object>>();
+		ESBaseVO<HashMap<String,Object>> base = new ESBaseVO<HashMap<String,Object>>();
 		base.setTotal(vos.size());
 		base.setRows(vos);
 
@@ -145,5 +142,43 @@ public class ChannelService implements IChannelService {
 		}		
 		
 		return vos;
+	}
+
+	@Override
+	public String queryOutlineTitle() {
+		//报表标题、手工指定
+		List<ESColumn> preColumns = new ArrayList<ESColumn>();
+		preColumns.add(new ESColumn("channel_name" , "渠道名称",200));
+		preColumns.add(new ESColumn("channel_url" , "监测网址",250));
+		preColumns.add(new ESColumn("person_response" , "负责人"));
+		preColumns.add(new ESColumn("register_num" , "注册人数"));
+		preColumns.add(new ESColumn("real_num" , "实名人数"));
+		preColumns.add(new ESColumn("invest_num" , "投资人数"));
+		preColumns.add(new ESColumn("invest_money" , "投资金额"));
+		
+		return GsonUtil.toJson(preColumns);
+	}
+
+	@Override
+	public String queryOutlineData() {
+		
+		List<OutlineData> datas = channelDao.selectOutlineData();
+		
+		OutlineData total = new OutlineData();
+		total.setName("汇总");
+		
+		for(OutlineData each : datas) {
+			total.setRegisterNum(total.getRegisterNum()+each.getRegisterNum());
+			total.setRealNum(total.getRealNum()+each.getRealNum());
+			total.setInvestNum(total.getInvestNum()+each.getInvestNum());
+			total.setInvestMoney(total.getInvestMoney().add(each.getInvestMoney()));
+		}
+		datas.add(0, total);
+		
+		ESBaseVO<OutlineData> base = new ESBaseVO<OutlineData>();
+		base.setTotal(datas.size());
+		base.setRows(datas);
+
+		return GsonUtil.toJson(base);
 	}
 }

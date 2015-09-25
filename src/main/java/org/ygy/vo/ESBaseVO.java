@@ -2,7 +2,7 @@ package org.ygy.vo;
 
 import java.util.List;
 
-public class BaseVO<T> {
+public class ESBaseVO<T> {
 
 	private int total;
 	private List<T> rows;

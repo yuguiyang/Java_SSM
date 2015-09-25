@@ -16,7 +16,7 @@ import org.ygy.entity.echarts.MapSerie;
 import org.ygy.entity.echarts.Serie;
 import org.ygy.service.ICustomerService;
 import org.ygy.util.GsonUtil;
-import org.ygy.vo.BaseVO;
+import org.ygy.vo.ESBaseVO;
 import org.ygy.vo.RegisterVO;
 
 @Service("customerService")
@@ -28,7 +28,7 @@ public class CustomerService implements ICustomerService {
 	@Override
 	public String queryRegisterInfo(PageSearch pageSearch) {
 
-		BaseVO<RegisterVO> base = new BaseVO<RegisterVO>();
+		ESBaseVO<RegisterVO> base = new ESBaseVO<RegisterVO>();
 		
 		int total = customerDao.selectRegisterCount(pageSearch);
 		base.setTotal(total);

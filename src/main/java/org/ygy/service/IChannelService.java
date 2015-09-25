@@ -36,4 +36,16 @@ public interface IChannelService {
 	 * @return
 	 */
 	public List<ArrayList<String>> queryChannelInfoForExport(PageSearch pageSearch);
+
+	/**
+	 * 查询市场部-标题
+	 * @return
+	 */
+	public String queryOutlineTitle();
+
+	/**
+	 * 查询市场部-数据
+	 * @return
+	 */
+	public String queryOutlineData();
 }
