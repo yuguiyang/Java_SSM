@@ -20,5 +20,14 @@ public class CompanyController {
 		String result = channelService.queryCompanyData();
 		
 		return result;
-	}	
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/lastupdate" ,produces="text/html;charset=UTF-8")
+	public String lastUpdate() {
+		
+		String result = channelService.queryLastUpdate();
+		
+		return result;
+	}
 }

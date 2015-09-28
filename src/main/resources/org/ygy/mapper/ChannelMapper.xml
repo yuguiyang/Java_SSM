@@ -204,7 +204,7 @@
   	<select id="selectOutlineDetailMoney" resultMap="outlineDetail">
 		select 
 			date(calendar_id) calendar_id, 
-			sum(deal_amount) cust_num
+			sum(deal_amount)/10000 cust_num
 		from 
 			dr_bi.dm_cust_channel_analyse
 		where calendar_id &lt;date_format(now(),'%Y%m%d')

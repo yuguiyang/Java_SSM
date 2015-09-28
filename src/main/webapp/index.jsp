@@ -21,54 +21,12 @@
 	<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
 	<script type="text/javascript" src="js/es_company_outline.js"></script>
 	
-<style type="text/css">
-body {
-	/*min-height: 2000px;*/
-	padding-top: 70px;
-}
-/*修改列标题的背景颜色*/
-.datagrid-header-row td{
-	/*background-color:#373C64;*/
-	background-color:#E0ECFF;
-	color:#0E2DSF;
-	font-weight:bold;
-}
-/*修改列标题的背景颜色 鼠标滑动*/
-.datagrid-header td.datagrid-header-over{
-	background-color:#E0ECFF;
-	color:#0E2DSF;
-	font-weight:bold;
-}    
-.arrow-up {
-	width:16px;
-	height:16px;
-    background-image: url("images/arrow_up.png");
-    background-position: right 0;
-    background-repeat: no-repeat;
-}
-
-.arrow-down {
-    background-image: url("images/arrow_down.png");
-    background-repeat: no-repeat;
-}
-.datagrid-wrap{
-	border:0px;
-}
-.datagrid-header-row{
-	height:50px;	
-}
-.datagrid-row{
-	height:90px;
-	border:0px;
-}
-.datagrid-cell{
-	font-size: 15px;
-}
-</style>	
 	    
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="echarts/echarts.js"></script>
 	
+	<script type="text/javascript" src="js/base.js"></script>
+	<link rel="stylesheet" href="css/base.css">
 </head>
 <body>
     <!-- Fixed navbar -->
@@ -109,7 +67,7 @@ body {
 					</div>
 					
 				</div>
-				
+				<div style="text-align:right;margin-top:20px;margin-bottom:20px;">上次更新时间：<span id="p_last_update">a</span></div>
 				<table id="es_company_outline" style="margin-top:20px;font-family:microsoft yahei;"></table>
 				
 			</div>

@@ -1,8 +1,15 @@
 package org.ygy.vo;
 
-public class OutlineDetail {
+public class DateVO {
 	private String calendarId;
-	private Double custNum;
+	
+	public DateVO() {
+		
+	}
+	
+	public DateVO(String calendarId) {
+		this.calendarId = calendarId;
+	}
 
 	public String getCalendarId() {
 		return calendarId;
@@ -11,14 +18,5 @@ public class OutlineDetail {
 	public void setCalendarId(String calendarId) {
 		this.calendarId = calendarId;
 	}
-
-	public Double getCustNum() {
-		return custNum;
-	}
-
-	public void setCustNum(Double custNum) {
-		this.custNum = custNum;
-	}
-
 	
 }

@@ -22,7 +22,7 @@
 	
 <style type="text/css">
 body {
-	min-height: 2000px;
+	min-height: 1000px;
 	padding-top: 70px;
 }
 .datagrid-header-row td{
@@ -41,6 +41,7 @@ body {
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="echarts/echarts.js"></script>
 	<script type="text/javascript" src="js/es_market_outline.js"></script>
+	<script type="text/javascript" src="js/base.js"></script>
 </head>
 <body>
     <!-- Fixed navbar -->
@@ -81,12 +82,12 @@ body {
 					</div>
 					
 				</div>
-				
+				<div style="text-align:right;margin-top:20px;margin-bottom:20px;">上次更新时间：<span id="p_last_update">a</span></div>
 				<table id="es_market_outline" style="margin-top:20px;font-family:microsoft yahei;"></table>
 				
 			</div>
 
-				<div id="es_market_detail" class="easyui-tabs" style="width:1170px;height:800px;padding-top:20px;padding-bottom:20px;">
+				<div id="es_market_detail" class="easyui-tabs" style="width:1170px;height:800px;padding-top:20px;padding-bottom:20px;display:none;">
 				    <div title="注册人数" style="padding:20px;">
 						<div id="ec_market_detail_register" style="width: 1000px; height: 400px;"></div>
 				    </div>

@@ -57,4 +57,6 @@ public interface IChannelService {
 
 	
 	public String queryCompanyData();
+
+	public String queryLastUpdate();
 }

@@ -1,6 +1,9 @@
 package org.ygy.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,6 +19,7 @@ import org.ygy.entity.echarts.Serie;
 import org.ygy.service.IChannelService;
 import org.ygy.util.GsonUtil;
 import org.ygy.vo.ChannelInfoVO;
+import org.ygy.vo.DateVO;
 import org.ygy.vo.ESBaseVO;
 import org.ygy.vo.OutlineData;
 import org.ygy.vo.OutlineDetail;
@@ -206,7 +210,7 @@ public class ChannelService implements IChannelService {
 		}
 		
 		String[] names = new String[details.size()];
-		Integer[] datas = new Integer[details.size()];
+		Object[] datas = new Object[details.size()];
 		for(int index=0; index<details.size();  index++) {
 			names[index] = details.get(index).getCalendarId();
 			datas[index] = details.get(index).getCustNum();
@@ -221,7 +225,7 @@ public class ChannelService implements IChannelService {
 		echart.setxAxis("category", names);
 		echart.setyAxis("value");
 		
-		BaseSerie serie = new Serie<Integer>(baseName , "line",datas);
+		BaseSerie serie = new Serie<Object>(baseName , "line",datas);
 		List<BaseSerie> series = new ArrayList<BaseSerie>();
 		series.add(serie);
 		
@@ -239,5 +243,18 @@ public class ChannelService implements IChannelService {
 		base.setRows(datas);
 
 		return GsonUtil.toJson(base);
+	}
+
+	@Override
+	public String queryLastUpdate() {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.set(Calendar.DAY_OF_MONTH,cal.get(Calendar.DAY_OF_MONTH)-1);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		DateVO result = new DateVO(sdf.format(cal.getTime()));
+		
+		return GsonUtil.toJson(result);
 	}
 }

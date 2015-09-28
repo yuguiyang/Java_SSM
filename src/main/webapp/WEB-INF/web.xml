@@ -54,6 +54,7 @@
 		<url-pattern>/nav/*</url-pattern>
 		<url-pattern>/js/*</url-pattern>
 		<url-pattern>/images/*</url-pattern>
+		<url-pattern>/css/*</url-pattern>
 	</servlet-mapping>
 
 	<error-page>
