@@ -54,4 +54,7 @@ public interface IChannelService {
 	 * @return
 	 */
 	public String queryOutlineDetail(String item);
+
+	
+	public String queryCompanyData();
 }

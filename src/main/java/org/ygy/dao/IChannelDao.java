@@ -49,6 +49,8 @@ public interface IChannelDao {
 	public List<OutlineDetail> selectOutlineDetailInvest();
 
 	public List<OutlineDetail> selectOutlineDetailMoney();
+
+	public List<OutlineData> selectCompanyData();
 	
 
 }

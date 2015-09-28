@@ -22,7 +22,7 @@ public class MarketController {
 		
 		String result = channelService.queryOutlineTitle();
 		
-		return result;		
+		return result;
 	}
 	
 	@ResponseBody

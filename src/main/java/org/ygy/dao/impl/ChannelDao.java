@@ -84,6 +84,13 @@ public class ChannelDao extends SqlSessionDaoSupport  implements IChannelDao {
 		List<OutlineDetail> datas = getSqlSession().selectList(Mappers.CHANNEL + "selectOutlineDetailMoney");
 		
 		return datas;
+	}
+
+	@Override
+	public List<OutlineData> selectCompanyData() {
+		List<OutlineData> datas = getSqlSession().selectList(Mappers.CHANNEL + "selectCompanyData");
+		
+		return datas;
 	}  
 	
 	

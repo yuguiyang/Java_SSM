@@ -229,4 +229,15 @@ public class ChannelService implements IChannelService {
 		
 		return GsonUtil.toJson(echart);
 	}
+
+	@Override
+	public String queryCompanyData() {
+		List<OutlineData> datas = channelDao.selectCompanyData();
+		
+		ESBaseVO<OutlineData> base = new ESBaseVO<OutlineData>();
+		base.setTotal(datas.size());
+		base.setRows(datas);
+
+		return GsonUtil.toJson(base);
+	}
 }

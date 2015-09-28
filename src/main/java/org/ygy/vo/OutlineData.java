@@ -3,6 +3,7 @@ package org.ygy.vo;
 import java.math.BigDecimal;
 
 public class OutlineData {
+	private String calendarId;
 	private String name;
 	private String url;
 	private String personResponse;
@@ -10,6 +11,14 @@ public class OutlineData {
 	private Integer realNum = 0;
 	private Integer investNum = 0;
 	private BigDecimal investMoney = new BigDecimal(0.0);
+	
+	public String getCalendarId() {
+		return calendarId;
+	}
+
+	public void setCalendarId(String calendarId) {
+		this.calendarId = calendarId;
+	}
 
 	public String getName() {
 		return name;
