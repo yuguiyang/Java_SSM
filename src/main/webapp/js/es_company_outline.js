@@ -11,12 +11,13 @@ $(document).ready(function() {
 	    return result;
 	}
 		
+/*	
 	var data_before = [];
-	
 	   $('#es_company_outline').datagrid({
 	    	width: '1100px',
 	    	height: 'auto',
 //	    	fit:true,
+	    	checkOnSelect:false,
 	        url:'company/outline/data',
 	        method:'post',
 	        striped: false,//隔行变色
@@ -104,8 +105,58 @@ $(document).ready(function() {
 //	        	$(this).datagrid('freezeRow',0);
 	    	}		        
 	    });
+*/	   
 	   
-	   
+
+	   $('#es_company_outline').datagrid({
+	    	width: '1200px',
+	    	height: 'auto',
+//	    	fit:true,
+	    	checkOnSelect:false,
+	        url:'company/outline/data',
+	        method:'post',
+	        striped: false,//隔行变色
+	        columns:[[
+	    		{field:'registerNum',title:'注册人数',width:300,align:'center',
+	    			formatter:function(value,row,index){
+	    				return toThousands(value);
+	    			},
+	    			styler: function(value,row,index){
+	    				
+	    			}
+	    		},
+	    		{field:'realNum',title:'实名人数',width:300,align:'center',
+	    			formatter: function(value,row,index){
+	    				return toThousands(value);
+	    			},
+	    			styler: function(value,row,index){
+	    				
+	    			}	    			
+	    		},
+	    		{field:'investNum',title:'投资人数',width:300,align:'center',
+	    			formatter: function(value,row,index){
+	    				return toThousands(value);
+	    			},
+	    			styler: function(value,row,index){
+	    				
+	    			}	    			
+	    		},
+	    		{field:'investMoney',title:'投资金额 (万元)',width:300,align:'center',
+	    			formatter: function(value,row,index){
+	    				return value;
+	    			},	    			
+	    			styler: function(value,row,index){
+	    				
+	    			}
+	    		}
+	        ]],
+			rowStyler: function(index,row){
+				if (index==0){
+				}
+			},
+	        onLoadSuccess: function(data){
+	    	}		        
+	    });
 	   
 	    $('#es_company_detail').tabs({
 	    	border:false,

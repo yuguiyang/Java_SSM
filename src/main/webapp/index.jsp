@@ -23,18 +23,20 @@
 	
 <style type="text/css">
 body {
-	min-height: 2000px;
+	/*min-height: 2000px;*/
 	padding-top: 70px;
 }
+/*修改列标题的背景颜色*/
 .datagrid-header-row td{
-	background-color:#373C64;
-	color:#FFFFFF;
+	/*background-color:#373C64;*/
+	background-color:#E0ECFF;
+	color:#0E2DSF;
 	font-weight:bold;
 }
-
+/*修改列标题的背景颜色 鼠标滑动*/
 .datagrid-header td.datagrid-header-over{
-	background-color:#373C64;
-	color:#FFFFFF;
+	background-color:#E0ECFF;
+	color:#0E2DSF;
 	font-weight:bold;
 }    
 .arrow-up {
@@ -112,21 +114,21 @@ body {
 				
 			</div>
 			
-				<div id="es_company_detail" class="easyui-tabs" style="width:1100px;height:800px;padding-top:20px;padding-bottom:20px;">
+				<div id="es_company_detail" class="easyui-tabs" style="width:1200px;height:800px;padding-top:20px;padding-bottom:20px;">
 				    <div title="注册人数" style="padding:20px;">
-						<div id="ec_market_detail_register" style="width: 1000px; height: 400px;"></div>
+						<div id="ec_market_detail_register" style="width: 1200px; height: 400px;"></div>
 				    </div>
 				    
 				    <div title="实名人数" style="padding:20px;">
-						<div id="ec_market_detail_real" style="width: 1000px; height: 400px;"></div>
+						<div id="ec_market_detail_real" style="width: 1200px; height: 400px;"></div>
 				    </div>
 				    
 				    <div title="投资人数"  style="padding:20px;">
-						<div id="ec_market_detail_invest" style="width: 1000px; height: 400px;"></div>
+						<div id="ec_market_detail_invest" style="width: 1200px; height: 400px;"></div>
 				    </div>
 				    
 			        <div title="投资金额"  style="padding:20px;">
-			            <div id="ec_market_detail_money" style="width: 1000px; height: 400px;"></div>
+			            <div id="ec_market_detail_money" style="width: 1200px; height: 400px;"></div>
 			        </div>	
 			        	    
 				</div>			
