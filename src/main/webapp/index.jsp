@@ -65,6 +65,7 @@ body {
 </style>	
 	    
 	<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="echarts/echarts.js"></script>
 	
 </head>
 <body>
@@ -85,7 +86,7 @@ body {
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">主页</a></li>
-            <li><a href="#">市场部</a></li>
+            <li><a href="market.jsp">市场部</a></li>
             <li><a href="#">运营部</a></li>
             <li><a href="#about">关于</a></li>
           </ul>
@@ -110,6 +111,25 @@ body {
 				<table id="es_company_outline" style="margin-top:20px;font-family:microsoft yahei;"></table>
 				
 			</div>
+			
+				<div id="es_company_detail" class="easyui-tabs" style="width:1100px;height:800px;padding-top:20px;padding-bottom:20px;">
+				    <div title="注册人数" style="padding:20px;">
+						<div id="ec_market_detail_register" style="width: 1000px; height: 400px;"></div>
+				    </div>
+				    
+				    <div title="实名人数" style="padding:20px;">
+						<div id="ec_market_detail_real" style="width: 1000px; height: 400px;"></div>
+				    </div>
+				    
+				    <div title="投资人数"  style="padding:20px;">
+						<div id="ec_market_detail_invest" style="width: 1000px; height: 400px;"></div>
+				    </div>
+				    
+			        <div title="投资金额"  style="padding:20px;">
+			            <div id="ec_market_detail_money" style="width: 1000px; height: 400px;"></div>
+			        </div>	
+			        	    
+				</div>			
 
 		</div>
 

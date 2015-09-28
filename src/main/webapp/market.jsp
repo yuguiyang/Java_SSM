@@ -59,8 +59,8 @@ body {
         
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">主页</a></li>
-            <li><a href="#">市场部</a></li>
+            <li><a href="index.jsp">主页</a></li>
+            <li  class="active"><a href="#">市场部</a></li>
             <li><a href="#">运营部</a></li>
             <li><a href="#about">关于</a></li>
           </ul>
