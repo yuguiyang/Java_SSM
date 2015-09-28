@@ -114,7 +114,7 @@ body {
 				
 			</div>
 			
-				<div id="es_company_detail" class="easyui-tabs" style="width:1200px;height:800px;padding-top:20px;padding-bottom:20px;">
+				<div id="es_company_detail" class="easyui-tabs" style="width:1200px;height:800px;padding-top:50px;padding-bottom:20px;">
 				    <div title="注册人数" style="padding:20px;">
 						<div id="ec_market_detail_register" style="width: 1200px; height: 400px;"></div>
 				    </div>
